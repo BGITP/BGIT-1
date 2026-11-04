@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
-import { RegionalScorecard } from './components/RegionalScorecard';
 import { SeasonCostGuide } from './components/SeasonCostGuide';
 import { PackageList } from './components/PackageList';
 import { BgitDifferentiators } from './components/BgitDifferentiators';
@@ -10,9 +9,9 @@ import { ProductDetailModal } from './components/ProductDetailModal';
 import { ReservationModal } from './components/ReservationModal';
 import { PdfExactView } from './components/PdfExactView';
 import { KakaoShareModal } from './components/KakaoShareModal';
-import { GolfPackage, PackageCategory, RegionId } from './types/golf';
+import { GolfPackage, PackageCategory } from './types/golf';
 import { COMPANY_INFO } from './data/golfData';
-import { Phone, MessageCircle, FileText, Share2 } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 
 export default function App() {
   const [activeView, setActiveView] = useState<'interactive' | 'pdf'>('interactive');
@@ -27,29 +26,18 @@ export default function App() {
     setIsReservationOpen(true);
   };
 
-  const handleSelectRegionForFilter = (regionId: RegionId) => {
-    if (regionId === 'bangkok') {
-      setPackageCategoryFilter('bangkok-value');
-    } else if (regionId === 'pattaya') {
-      setPackageCategoryFilter('pattaya-value');
-    } else {
-      setPackageCategoryFilter('all');
-    }
-    // Scroll smoothly to package list section
-    const el = document.getElementById('packages');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <div className="min-h-screen bg-white text-stone-900 flex flex-col font-sans selection:bg-emerald-800 selection:text-white">
-      {/* Top Bar Header */}
+      {/* Top Bar Header with 9 Menus */}
       <Header
         onOpenReservation={handleOpenReservation}
-        activeView={activeView}
-        onToggleView={setActiveView}
-        onOpenKakaoPreview={() => setIsKakaoPreviewOpen(true)}
+        onSelectCategory={(cat) => {
+          setPackageCategoryFilter(cat);
+          const el = document.getElementById('packages');
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
       />
 
       {/* Main Content: Depending on activeView */}
@@ -67,12 +55,6 @@ export default function App() {
           <HeroSection
             onOpenReservation={() => handleOpenReservation()}
             onViewPdfMode={() => setActiveView('pdf')}
-          />
-
-          {/* Regional Scorecard Section (PDF Page 1 & 2) */}
-          <RegionalScorecard
-            onSelectRegionForFilter={handleSelectRegionForFilter}
-            onOpenReservation={(region) => handleOpenReservation()}
           />
 
           {/* Season & Cost Guide (PDF Page 2 & Screenshot 1) */}
@@ -115,33 +97,12 @@ export default function App() {
 
       {/* Floating Quick Action Widget on Mobile & Desktop */}
       <div className="fixed bottom-5 right-5 z-30 flex flex-col items-end gap-2.5 print:hidden">
-        {/* Kakao Share Preview Trigger */}
-        <button
-          type="button"
-          onClick={() => setIsKakaoPreviewOpen(true)}
-          className="px-3 py-2 bg-[#FEE500] hover:bg-[#FDD800] text-[#191919] rounded-full text-xs font-bold shadow-lg flex items-center gap-1.5 transition-transform hover:scale-105 cursor-pointer"
-          title="카카오톡 링크 공유 미리보기"
-        >
-          <span className="w-2 h-2 rounded-full bg-[#191919]" />
-          <span>카톡 공유 카드</span>
-        </button>
-
-        {/* Toggle to PDF or Interactive quick pill */}
-        <button
-          type="button"
-          onClick={() => setActiveView(activeView === 'interactive' ? 'pdf' : 'interactive')}
-          className="px-3.5 py-2 bg-stone-900/90 hover:bg-stone-900 text-white rounded-full text-xs font-semibold shadow-lg backdrop-blur-xs flex items-center gap-1.5 transition-transform hover:scale-105 cursor-pointer"
-        >
-          <FileText className="w-3.5 h-3.5 text-emerald-400" />
-          <span>{activeView === 'interactive' ? 'PDF 원본 양식 뷰' : '웹 인터랙티브 뷰'}</span>
-        </button>
-
         {/* Quick Line / Kakao Chat Float */}
         <a
           href={`https://line.me/ti/p/~${COMPANY_INFO.line}`}
           target="_blank"
           rel="noreferrer"
-          className="p-3 bg-[#06C755] hover:bg-[#05b34c] text-white rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center cursor-pointer"
+          className="p-3.5 bg-[#06C755] hover:bg-[#05b34c] text-white rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center cursor-pointer"
           title="라인 실시간 현지 상담"
         >
           <MessageCircle className="w-6 h-6" />

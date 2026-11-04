@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FAQ_SEASON_AND_COST } from '../data/golfData';
-import { Sun, CloudRain, HelpCircle, Thermometer, Clock, DollarSign } from 'lucide-react';
+import { HelpCircle, Thermometer, DollarSign, Sun } from 'lucide-react';
 
 export const SeasonCostGuide: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState<number>(11);
@@ -87,7 +87,7 @@ export const SeasonCostGuide: React.FC = () => {
               </p>
             </div>
             <div className="text-xs text-stone-500 font-medium">
-              선택한 달: <strong className="text-emerald-800 text-sm font-bold">{selectedMonth}월</strong>
+              선택한 달: <strong className="text-emerald-800 text-sm font-bold">{selectedMonth}월</strong> ({currentMonthInfo.season} · {currentMonthInfo.temp})
             </div>
           </div>
 
@@ -117,34 +117,6 @@ export const SeasonCostGuide: React.FC = () => {
                 </button>
               );
             })}
-          </div>
-
-          {/* Result Banner for Selected Month */}
-          <div className="p-4 sm:p-5 bg-stone-50 rounded-xl border border-stone-200 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs sm:text-sm">
-            <div className="flex items-start gap-3">
-              <Sun className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
-              <div>
-                <p className="text-stone-500 text-xs">시즌 구분 / 기온</p>
-                <p className="font-bold text-stone-900">{currentMonthInfo.season}</p>
-                <p className="text-stone-600 text-xs mt-0.5">{currentMonthInfo.temp}</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <CloudRain className="w-5 h-5 text-sky-600 mt-0.5 shrink-0" />
-              <div>
-                <p className="text-stone-500 text-xs">기후 및 환경</p>
-                <p className="font-semibold text-stone-800">{currentMonthInfo.weather}</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <Clock className="w-5 h-5 text-emerald-700 mt-0.5 shrink-0" />
-              <div>
-                <p className="text-stone-500 text-xs">BGIT 현지 전문가 권장 팁</p>
-                <p className="font-medium text-emerald-900">{currentMonthInfo.tip}</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
