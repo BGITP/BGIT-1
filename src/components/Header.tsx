@@ -6,12 +6,14 @@ interface HeaderProps {
   onOpenReservation: (packageId?: string) => void;
   activeView: 'interactive' | 'pdf';
   onToggleView: (view: 'interactive' | 'pdf') => void;
+  onOpenKakaoPreview: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onOpenReservation,
   activeView,
   onToggleView,
+  onOpenKakaoPreview,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -25,13 +27,13 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-6 h-20">
+        <div className="flex items-center justify-between gap-4 sm:gap-6 h-20">
           {/* Zone 1: Brand wordmark & emblem badge */}
           <a href="#" className="flex items-center gap-3 shrink-0 group">
             <img
-              src={COMPANY_INFO.badgeLogo}
-              alt="BGIT Thai Logo"
-              className="h-11 w-auto object-contain rounded shadow-xs"
+              src={COMPANY_INFO.logoShield}
+              alt="BGIT Thai Shield Logo"
+              className="h-12 w-auto object-contain drop-shadow-xs group-hover:scale-105 transition-transform"
               referrerPolicy="no-referrer"
             />
             <div className="flex flex-col">
@@ -85,11 +87,22 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
             </div>
 
+            {/* Kakao Share Preview Button */}
+            <button
+              type="button"
+              onClick={onOpenKakaoPreview}
+              className="hidden md:flex items-center gap-1.5 px-3 py-2 bg-[#FEE500] hover:bg-[#FDD800] text-[#191919] rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 shadow-2xs cursor-pointer"
+              title="카카오톡 링크 공유 미리보기"
+            >
+              <span className="w-2 h-2 rounded-full bg-[#191919]" />
+              <span>카카오 링크 공유</span>
+            </button>
+
             {/* Primary Action Button */}
             <button
               type="button"
               onClick={() => onOpenReservation()}
-              className="px-4 py-2.5 text-xs sm:text-sm font-semibold text-white bg-emerald-800 hover:bg-emerald-900 rounded-lg shadow-sm hover:shadow transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5"
+              className="px-4 py-2.5 text-xs sm:text-sm font-semibold text-white bg-emerald-800 hover:bg-emerald-900 rounded-lg shadow-sm hover:shadow transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 cursor-pointer"
             >
               <MessageCircle className="w-4 h-4" />
               <span>실시간 예약 및 견적</span>
@@ -151,6 +164,17 @@ export const Header: React.FC<HeaderProps> = ({
                 {link.label}
               </a>
             ))}
+
+            <button
+              type="button"
+              onClick={() => {
+                onOpenKakaoPreview();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full py-2.5 px-3 bg-[#FEE500] text-[#191919] font-bold text-xs rounded-lg flex items-center justify-center gap-2"
+            >
+              <span>카카오톡 링크 공유 미리보기</span>
+            </button>
 
             <div className="pt-2 border-t border-stone-100 flex items-center gap-2 text-xs text-stone-500">
               <Phone className="w-3.5 h-3.5 text-emerald-700" />

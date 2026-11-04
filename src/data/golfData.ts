@@ -15,6 +15,8 @@ export const COMPANY_INFO = {
   lineChatUrl: 'https://line.me/ti/p/~auddnjs',
   pdfPath: '/assets/aistudio/aaaaa_1003ed43.pdf',
   badgeLogo: '/assets/aistudio/___4aeabcc8.jpg',
+  logoShield: '/assets/aistudio/ewfwfw_3d4e3155.jpg',
+  announcement: '최고품질 최저가의 골프상품을 한국여행사에 공급하고 있습니다',
 };
 
 export const GOLF_REGIONS: GolfRegion[] = [

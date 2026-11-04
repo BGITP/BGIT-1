@@ -9,14 +9,16 @@ import { Footer } from './components/Footer';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { ReservationModal } from './components/ReservationModal';
 import { PdfExactView } from './components/PdfExactView';
+import { KakaoShareModal } from './components/KakaoShareModal';
 import { GolfPackage, PackageCategory, RegionId } from './types/golf';
 import { COMPANY_INFO } from './data/golfData';
-import { Phone, MessageCircle, FileText } from 'lucide-react';
+import { Phone, MessageCircle, FileText, Share2 } from 'lucide-react';
 
 export default function App() {
   const [activeView, setActiveView] = useState<'interactive' | 'pdf'>('interactive');
   const [selectedPackage, setSelectedPackage] = useState<GolfPackage | null>(null);
   const [isReservationOpen, setIsReservationOpen] = useState(false);
+  const [isKakaoPreviewOpen, setIsKakaoPreviewOpen] = useState(false);
   const [reservationPackageId, setReservationPackageId] = useState<string | undefined>(undefined);
   const [packageCategoryFilter, setPackageCategoryFilter] = useState<PackageCategory | 'all'>('all');
 
@@ -47,6 +49,7 @@ export default function App() {
         onOpenReservation={handleOpenReservation}
         activeView={activeView}
         onToggleView={setActiveView}
+        onOpenKakaoPreview={() => setIsKakaoPreviewOpen(true)}
       />
 
       {/* Main Content: Depending on activeView */}
@@ -104,8 +107,25 @@ export default function App() {
         selectedPackageId={reservationPackageId}
       />
 
+      {/* KakaoTalk Share Preview Modal */}
+      <KakaoShareModal
+        isOpen={isKakaoPreviewOpen}
+        onClose={() => setIsKakaoPreviewOpen(false)}
+      />
+
       {/* Floating Quick Action Widget on Mobile & Desktop */}
       <div className="fixed bottom-5 right-5 z-30 flex flex-col items-end gap-2.5 print:hidden">
+        {/* Kakao Share Preview Trigger */}
+        <button
+          type="button"
+          onClick={() => setIsKakaoPreviewOpen(true)}
+          className="px-3 py-2 bg-[#FEE500] hover:bg-[#FDD800] text-[#191919] rounded-full text-xs font-bold shadow-lg flex items-center gap-1.5 transition-transform hover:scale-105 cursor-pointer"
+          title="카카오톡 링크 공유 미리보기"
+        >
+          <span className="w-2 h-2 rounded-full bg-[#191919]" />
+          <span>카톡 공유 카드</span>
+        </button>
+
         {/* Toggle to PDF or Interactive quick pill */}
         <button
           type="button"
@@ -116,7 +136,7 @@ export default function App() {
           <span>{activeView === 'interactive' ? 'PDF 원본 양식 뷰' : '웹 인터랙티브 뷰'}</span>
         </button>
 
-        {/* Quick Kakao Chat Float */}
+        {/* Quick Line / Kakao Chat Float */}
         <a
           href={`https://line.me/ti/p/~${COMPANY_INFO.line}`}
           target="_blank"

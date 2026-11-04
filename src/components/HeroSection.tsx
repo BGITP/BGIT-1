@@ -26,14 +26,27 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28">
         <div className="max-w-3xl">
-          {/* Tagline / Subtitle */}
-          <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wide text-emerald-400 mb-4">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-950/70 border border-emerald-500/30 rounded-full">
-              <Sparkles className="w-3.5 h-3.5" />
-              태국 현지 직영 골프 전문회사
-            </span>
-            <span className="text-stone-400">·</span>
-            <span className="text-stone-300">Join With Thai Golfer</span>
+          {/* Logo & Tagline */}
+          <div className="flex items-center gap-3 mb-5">
+            <img
+              src={COMPANY_INFO.logoShield}
+              alt="BGIT Thai Shield Emblem"
+              className="w-14 h-14 sm:w-16 sm:h-16 object-contain drop-shadow-xl"
+              referrerPolicy="no-referrer"
+            />
+            <div>
+              <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wide text-emerald-400">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-950/70 border border-emerald-500/30 rounded-full">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  태국 현지 직영 골프 전문회사
+                </span>
+                <span className="text-stone-400">·</span>
+                <span className="text-stone-300">BGIT Thai</span>
+              </div>
+              <p className="text-xs sm:text-sm font-bold text-amber-300 mt-1">
+                "{COMPANY_INFO.announcement}"
+              </p>
+            </div>
           </div>
 
           {/* Dominant Headline */}
