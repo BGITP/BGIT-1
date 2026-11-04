@@ -19,17 +19,22 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 pb-8 border-b border-stone-200">
           {/* Company Brand & Address strictly matching screenshot 3 */}
           <div className="space-y-3">
-            {/* Logo text matching B G i T Thai */}
-            <div className="flex items-center gap-2">
-              <span className="text-2xl sm:text-3xl font-extrabold tracking-tight font-serif text-stone-900">
-                B G <span className="text-blue-600">i</span> T
-              </span>
-              <span className="text-base sm:text-lg font-semibold text-blue-600">
-                Thai
-              </span>
-              <span className="text-xs text-stone-500 ml-2 hidden sm:inline">
-                태국 현지 골프 전문회사
-              </span>
+            {/* Logo image and brand text */}
+            <div className="flex items-center gap-3">
+              <img
+                src={COMPANY_INFO.badgeLogo}
+                alt="BGIT Thai Logo"
+                className="h-10 w-auto object-contain drop-shadow-xs rounded"
+                referrerPolicy="no-referrer"
+              />
+              <div className="flex items-center gap-2">
+                <span className="text-xl sm:text-2xl font-extrabold tracking-tight font-serif text-stone-900">
+                  B G <span className="text-blue-600">i</span> T
+                </span>
+                <span className="text-sm sm:text-base font-semibold text-blue-600">
+                  Thai
+                </span>
+              </div>
             </div>
 
             {/* Address */}

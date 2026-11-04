@@ -14,8 +14,8 @@ export const COMPANY_INFO = {
   line: 'auddnjs',
   lineChatUrl: 'https://line.me/ti/p/~auddnjs',
   pdfPath: '/assets/aistudio/aaaaa_1003ed43.pdf',
-  badgeLogo: '/assets/aistudio/___4aeabcc8.jpg',
-  logoShield: '/assets/aistudio/ewfwfw_3d4e3155.jpg',
+  badgeLogo: '/assets/aistudio/image_1e41fe8f_ffe6f88a.jpg',
+  logoShield: '/assets/aistudio/image_1e41fe8f_ffe6f88a.jpg',
   announcement: '최고품질 최저가의 골프상품을 한국여행사에 공급하고 있습니다',
 };
 

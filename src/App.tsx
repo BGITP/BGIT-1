@@ -43,7 +43,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAF9] text-stone-800 flex flex-col font-sans selection:bg-emerald-800 selection:text-white">
+    <div className="min-h-screen bg-white text-stone-900 flex flex-col font-sans selection:bg-emerald-800 selection:text-white">
       {/* Top Bar Header */}
       <Header
         onOpenReservation={handleOpenReservation}
