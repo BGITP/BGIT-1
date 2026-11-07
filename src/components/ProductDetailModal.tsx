@@ -3,7 +3,6 @@ import { GolfPackage } from '../types/golf';
 import { COMPANY_INFO } from '../data/golfData';
 import {
   X,
-  Calendar,
   Download,
   Building,
   Flag,
@@ -28,9 +27,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 }) => {
   if (!packageData) return null;
 
+  const [copied, setCopied] = React.useState(false);
+
   const handleDownloadPdf = () => {
     const link = document.createElement('a');
-    link.href = COMPANY_INFO.pdfPath;
+    link.href = packageData.pdfPath || COMPANY_INFO.pdfPath;
     link.download = packageData.downloadFilename;
     document.body.appendChild(link);
     link.click();
@@ -41,7 +42,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
     navigator.clipboard.writeText(
       `[BGIT Thai 골프 패키지] ${packageData.title}\n가격: ${packageData.priceFormatted}\n호텔: ${packageData.hotel}\n문의 카카오톡: ${COMPANY_INFO.kakao}`
     );
-    alert('상품 정보 및 문의 내용이 클립보드에 복사되었습니다.');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -124,7 +126,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           {/* Inclusions & Exclusions */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Inclusions */}
-            <div className="p-4 bg-emerald-50/50 rounded-xl border border-emerald-200/80">
+            <div className="p-4 bg-emerald-50/30 rounded-xl border border-stone-200 hover:border-[#d0fae5] transition-colors">
               <h4 className="text-xs font-bold text-emerald-900 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-700" />
                 포함 사항
@@ -140,7 +142,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             </div>
 
             {/* Exclusions */}
-            <div className="p-4 bg-stone-50 rounded-xl border border-stone-200">
+            <div className="p-4 bg-stone-50 rounded-xl border border-stone-200 hover:border-[#d0fae5] transition-colors">
               <h4 className="text-xs font-bold text-stone-700 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
                 <AlertCircle className="w-4 h-4 text-stone-400" />
                 불포함 사항
@@ -212,10 +214,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             <button
               type="button"
               onClick={handleCopyLink}
-              className="p-2.5 bg-white hover:bg-stone-100 text-stone-600 border border-stone-300 rounded-lg text-xs transition-colors"
+              className="p-2.5 bg-white hover:bg-stone-100 text-stone-600 border border-stone-300 rounded-lg text-xs transition-colors flex items-center gap-1"
               title="상품 정보 복사"
             >
               <Share2 className="w-4 h-4" />
+              {copied && <span className="text-[11px] font-bold text-emerald-700">복사완료!</span>}
             </button>
           </div>
 
@@ -224,23 +227,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               href={`https://line.me/ti/p/~${COMPANY_INFO.line}`}
               target="_blank"
               rel="noreferrer"
-              className="px-3.5 py-2.5 bg-[#06C755] hover:bg-[#05b34c] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors"
+              className="px-4 py-2.5 bg-[#06C755] hover:bg-[#05b34c] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors"
             >
               <MessageCircle className="w-4 h-4" />
-              <span className="hidden sm:inline">라인 상담</span>
+              <span>실시간 라인 상담</span>
             </a>
-
-            <button
-              type="button"
-              onClick={() => {
-                onClose();
-                onOpenReservation(packageData.id);
-              }}
-              className="px-5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg text-xs sm:text-sm font-bold flex items-center gap-2 transition-colors shadow-xs"
-            >
-              <Calendar className="w-4 h-4" />
-              <span>이 상품으로 즉시 견적/예약 신청</span>
-            </button>
           </div>
         </div>
       </div>

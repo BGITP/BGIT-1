@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
-import { SeasonCostGuide } from './components/SeasonCostGuide';
+import { BgitSpecialFeatures } from './components/BgitSpecialFeatures';
 import { PackageList } from './components/PackageList';
 import { BgitDifferentiators } from './components/BgitDifferentiators';
 import { Footer } from './components/Footer';
@@ -19,7 +19,7 @@ export default function App() {
   const [isReservationOpen, setIsReservationOpen] = useState(false);
   const [isKakaoPreviewOpen, setIsKakaoPreviewOpen] = useState(false);
   const [reservationPackageId, setReservationPackageId] = useState<string | undefined>(undefined);
-  const [packageCategoryFilter, setPackageCategoryFilter] = useState<PackageCategory | 'all'>('all');
+  const [packageCategoryFilter, setPackageCategoryFilter] = useState<PackageCategory | 'all'>('women-join');
 
   const handleOpenReservation = (packageId?: string) => {
     setReservationPackageId(packageId);
@@ -38,6 +38,7 @@ export default function App() {
             el.scrollIntoView({ behavior: 'smooth' });
           }
         }}
+        activeCategory={packageCategoryFilter}
       />
 
       {/* Main Content: Depending on activeView */}
@@ -57,10 +58,10 @@ export default function App() {
             onViewPdfMode={() => setActiveView('pdf')}
           />
 
-          {/* Season & Cost Guide (PDF Page 2 & Screenshot 1) */}
-          <SeasonCostGuide />
+          {/* BGIT Differentiators / Features */}
+          <BgitSpecialFeatures />
 
-          {/* Package List & Download Center (PDF Page 3 & 4) */}
+          {/* Package List & Download Center */}
           <PackageList
             onSelectPackage={setSelectedPackage}
             onOpenReservation={handleOpenReservation}

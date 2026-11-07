@@ -212,7 +212,7 @@ export const PdfExactView: React.FC<PdfExactViewProps> = ({
                     언제 가면 좋나요
                   </h3>
                   <p className="text-stone-700 text-xs sm:text-sm leading-relaxed pl-3">
-                    11월~2월이 건기이자 가장 선선한 성수기입니다. 3~5월은 매우 덥고, 6~10월은 우기라 오후 스콜을 감안해 이른 티타임을 권장합니다.
+                    10월~3월(3월과 10월 포함)이 선선하고 쾌적한 성수기입니다. 4월~9월은 합리적인 가격대의 비수기이며, 오후 스콜을 감안해 여유로운 오전 티타임을 권장합니다.
                   </p>
                 </div>
 

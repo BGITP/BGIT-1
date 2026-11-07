@@ -16,7 +16,7 @@ export const KakaoShareModal: React.FC<KakaoShareModalProps> = ({ isOpen, onClos
   const currentUrl = typeof window !== 'undefined' ? window.location.href : 'https://bgitthai.golf';
 
   const shareText = `[BGIT Thai - 태국 현지 골프 전문회사]
-최고품질 최저가의 골프상품을 한국여행사에 공급하고 있습니다.
+${COMPANY_INFO.announcement}
 
 ▶ 골프 패키지 & 지역별 스코어카드 확인:
 ${currentUrl}
@@ -78,12 +78,12 @@ ${currentUrl}
 
             {/* Kakao Shared URL Card */}
             <div className="max-w-xs sm:max-w-sm ml-auto bg-white rounded-2xl overflow-hidden shadow-md border border-stone-200">
-              {/* OG Image: User's 3D Silver Golfer Shield Logo */}
-              <div className="relative aspect-[1.91/1] bg-stone-900 overflow-hidden">
+              {/* OG Image: BGIT Thai Official Logo */}
+              <div className="relative aspect-[1.91/1] bg-white border-b border-stone-100 flex items-center justify-center p-3 overflow-hidden">
                 <img
                   src={COMPANY_INFO.logoShield}
                   alt="BGIT Thai 로고"
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-contain object-center"
                   referrerPolicy="no-referrer"
                 />
               </div>
@@ -97,7 +97,7 @@ ${currentUrl}
                   BGIT Thai - 태국 현지 골프 전문회사
                 </h4>
                 <p className="text-xs text-stone-600 leading-relaxed font-normal">
-                  최고품질 최저가의 골프상품을 한국여행사에 공급하고 있습니다
+                  {COMPANY_INFO.announcement}
                 </p>
               </div>
 
@@ -120,8 +120,7 @@ ${currentUrl}
               <span>카카오톡 및 소셜 OpenGraph 태그 설정 완료</span>
             </div>
             <p className="text-[11px] text-stone-500 leading-relaxed">
-              • <strong>로고 이미지:</strong> 신규 은색 입체 골프 엠블럼 (<code>ewfwfw_3d4e3155.jpg</code>)<br />
-              • <strong>안내문(설명):</strong> 최고품질 최저가의 골프상품을 한국여행사에 공급하고 있습니다
+              • <strong>안내문(설명):</strong> {COMPANY_INFO.announcement}
             </p>
           </div>
 

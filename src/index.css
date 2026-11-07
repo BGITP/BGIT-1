@@ -13,3 +13,14 @@
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
+
+/* 사이트 안의 모든 박스선: 기본 회색, 마우스를 올렸을 때는 첨부한 민트 색상(#d0fae5)으로 변화 */
+[class*="rounded-"][class*="border"]:not([class*="border-transparent"]):not([class*="border-b"]):not([class*="border-t"]) {
+  border-color: #e7e5e4;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+[class*="rounded-"][class*="border"]:not([class*="border-transparent"]):not([class*="border-b"]):not([class*="border-t"]):hover {
+  border-color: #d0fae5 !important;
+  box-shadow: 0 0 0 1px #d0fae5;
+}

@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
               <img
                 src={COMPANY_INFO.badgeLogo}
                 alt="BGIT Thai Logo"
-                className="h-10 w-auto object-contain drop-shadow-xs rounded"
+                className="h-11 sm:h-12 w-auto object-contain drop-shadow-xs"
                 referrerPolicy="no-referrer"
               />
               <div className="flex items-center gap-2">

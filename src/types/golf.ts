@@ -12,11 +12,15 @@ export interface GolfRegion {
 }
 
 export type PackageCategory = 
+  | 'women-join'
   | 'pattaya-value' 
+  | 'pattaya-premium'
   | 'pattaya-luxury' 
   | 'pattaya-poolvilla' 
+  | 'pattaya-golftel'
   | 'bangkok-value' 
   | 'bangkok-luxury' 
+  | 'entry-meeting-schedule'
   | 'guide';
 
 export interface GolfPackage {
@@ -37,6 +41,7 @@ export interface GolfPackage {
   recommendedFor: string;
   fileSize?: string;
   downloadFilename: string;
+  pdfPath?: string;
 }
 
 export interface InquiryFormData {

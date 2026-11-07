@@ -1,6 +1,8 @@
 {
   "name": "BGIT Thai - 태국 현지 골프 전문회사",
-  "description": "최고품질 최저가의 골프상품을 한국여행사에 공급하고 있습니다",
+  "description": "최상의 품질과 경쟁력 있는 가격의 골프 상품을 한국 여행사에 B2B로 직접 공급 하고 있습니다",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

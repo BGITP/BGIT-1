@@ -151,14 +151,6 @@ export const RegionalScorecard: React.FC<RegionalScorecardProps> = ({
                 <span>{activeRegion.nameKr} 상품 보기</span>
                 <ChevronRight className="w-4 h-4" />
               </button>
-              <button
-                type="button"
-                onClick={() => onOpenReservation(activeRegion.nameKr)}
-                className="flex-1 sm:flex-initial px-5 py-2.5 bg-white hover:bg-stone-100 text-stone-800 border border-stone-300 text-xs sm:text-sm font-medium rounded-lg transition-colors flex items-center justify-center gap-1.5"
-              >
-                <Calendar className="w-3.5 h-3.5 text-stone-500" />
-                <span>{activeRegion.nameKr} 견적 문의</span>
-              </button>
             </div>
           </div>
         </div>
