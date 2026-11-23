@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" fill="none">
+  <!-- Open Top Flap outline (pointing upwards) -->
+  <path d="M 24 82 L 100 16 L 176 82" stroke="#001F3F" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Inside Letter Sheet (Solid bright sky blue #00A2E8 / #009FE3 with dark navy outline) -->
+  <rect x="42" y="30" width="116" height="112" rx="12" fill="#00A2E8" stroke="#001F3F" stroke-width="8"/>
+  
+  <!-- Solid White bold '@' sign on the blue letter sheet matching original-1569650769539.png -->
+  <path d="M 100 64 C 87 64 77 74 77 87 C 77 100 87 110 100 110 C 108 110 115 106 119 100 L 119 107 C 119 116 114 120 106 120 C 97 120 93 115 93 108 M 100 74 C 107 74 111 79 111 87 C 111 94 107 99 100 99 C 93 99 89 94 89 87 C 89 79 93 74 100 74 Z" stroke="#FFFFFF" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="100" cy="87" r="2.5" fill="#FFFFFF"/>
+
+  <!-- Envelope Main Body (Pure White fill #FFFFFF with dark navy outline) -->
+  <path d="M 24 82 L 24 180 C 24 184 27 186 31 186 L 169 186 C 173 186 176 184 176 180 L 176 82 Z" fill="#FFFFFF" stroke="#001F3F" stroke-width="9" stroke-linejoin="round"/>
+  
+  <!-- Envelope Front V-Fold flap -->
+  <path d="M 24 82 L 100 138 L 176 82" stroke="#001F3F" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="#FFFFFF"/>
+  
+  <!-- Envelope Diagonal Creases from bottom corners meeting the V-Fold -->
+  <path d="M 24 184 L 80 128" stroke="#001F3F" stroke-width="9" stroke-linecap="round"/>
+  <path d="M 176 184 L 120 128" stroke="#001F3F" stroke-width="9" stroke-linecap="round"/>
+</svg>

@@ -5,7 +5,7 @@ import { HelpCircle, DollarSign, Sun } from 'lucide-react';
 export const SeasonCostGuide: React.FC = () => {
   return (
     <section id="season-guide" className="py-12 sm:py-20 bg-stone-50 border-b border-stone-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1156px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header strictly matching PDF & Screenshot */}
         <div className="mb-10">
           <div className="flex items-center gap-2 text-xs font-semibold text-emerald-800 tracking-wider uppercase mb-2">

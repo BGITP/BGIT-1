@@ -1,12 +1,31 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+:root {
+  --bg: #f6f4ee;
+  --sf: #ffffff;
+  --ink: #10231b;
+  --mu: #5d6b64;
+  --gr: #0f3d2e;
+  --gr2: #1d6b4f;
+  --go: #b8924a;
+  --ln: #e3dfd3;
+  --warn: #d9381e;
+}
+
 @layer base {
   body {
     font-family: 'Noto Sans KR', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: #1e293b;
     background-color: #ffffff;
     -webkit-font-smoothing: antialiased;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
   }
 }
 
@@ -23,4 +42,62 @@
 [class*="rounded-"][class*="border"]:not([class*="border-transparent"]):not([class*="border-b"]):not([class*="border-t"]):hover {
   border-color: #d0fae5 !important;
   box-shadow: 0 0 0 1px #d0fae5;
+}
+
+/* Mobile dot list style from uploaded HTML */
+ul.mobile-dot,
+ul.dot {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+ul.mobile-dot li,
+ul.dot li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 13px;
+  color: var(--mu);
+  margin-bottom: 7px;
+}
+ul.mobile-dot li::before,
+ul.dot li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gr2);
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Floating bobbing animation for moving menu button */
+@keyframes floatBob {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-float-bob {
+  animation: floatBob 3.4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 6px 20px rgba(15, 61, 46, 0.25), 0 0 0 0 rgba(29, 107, 79, 0.35);
+  }
+  50% {
+    box-shadow: 0 10px 28px rgba(15, 61, 46, 0.4), 0 0 0 7px rgba(29, 107, 79, 0);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

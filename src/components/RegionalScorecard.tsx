@@ -18,7 +18,7 @@ export const RegionalScorecard: React.FC<RegionalScorecardProps> = ({
 
   return (
     <section id="scorecard" className="py-16 sm:py-24 bg-white border-b border-stone-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1156px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header matching PDF */}
         <div className="mb-10 sm:mb-14">
           <div className="flex items-center gap-2 text-xs font-semibold text-emerald-800 tracking-wider uppercase mb-2">

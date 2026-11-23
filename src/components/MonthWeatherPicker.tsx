@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Thermometer } from 'lucide-react';
+import { CloudSun } from 'lucide-react';
 
 export const MonthWeatherPicker: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState<number>(11);
@@ -26,77 +26,71 @@ export const MonthWeatherPicker: React.FC = () => {
       {/* Section Header - Exactly matching reference image left position */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          {/* Weather & Climate - matched to uploaded screenshot */}
-          <div className="pl-7 mb-1.5">
-            <span className="text-xs sm:text-[13px] font-semibold text-[#007a55] tracking-wider uppercase">
-              WEATHER & CLIMATE
+          <h3 className="text-lg sm:text-xl font-bold text-[#222222] flex items-center gap-2.5">
+            <span className="w-9 h-9 rounded-xl bg-orange-50 border border-orange-200/80 flex items-center justify-center text-[#e05638] shrink-0">
+              <CloudSun className="w-5.5 h-5.5 stroke-[2.2]" />
             </span>
-          </div>
-          <h3 className="text-lg sm:text-xl font-bold text-[#222222] flex items-center gap-2">
-            <Thermometer className="w-5 h-5 text-[#007a55] shrink-0" />
             <span>태국 월별 기후 & 라운드 환경 시뮬레이터</span>
           </h3>
-          <p className="text-xs sm:text-[13px] text-[#666666] mt-1.5 pl-7 font-normal">
-            출국 예정 월을 클릭하시면 기후 특성과 권장 티타임을 확인하실 수 있습니다.
-          </p>
         </div>
-        <div className="text-xs text-stone-500 font-medium">
+        <div className="text-[14px] md:text-[13px] text-stone-500 font-medium">
           선택한 달: <strong className="text-emerald-800 text-sm font-bold">{selectedMonth}월</strong> ({currentMonthInfo.season} · {currentMonthInfo.temp})
         </div>
       </div>
 
-      {/* Simulator Interactive Card */}
-      <div className="bg-stone-50/70 p-6 sm:p-8 rounded-2xl border border-stone-200 shadow-xs hover:border-[#d0fae5] transition-colors">
-        {/* Month buttons (12 months) */}
-      <div className="grid grid-cols-6 sm:grid-cols-12 gap-1.5 mb-6">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => {
-          const isPeak = [10, 11, 12, 1, 2, 3].includes(m);
-          const isSelected = selectedMonth === m;
+      {/* Simulator Interactive Card (Mobile: Uploaded HTML .card / .months / .res style; Desktop: Enhanced Grid) */}
+      <div className="bg-white md:bg-stone-50/70 p-4 sm:p-8 rounded-[20px] sm:rounded-2xl border border-[#e3dfd3] shadow-[0_2px_6px_rgba(15,61,46,0.04)]">
+        {/* Month buttons (6x2 on mobile, 12 in a row on sm+) */}
+        <div className="grid grid-cols-6 sm:grid-cols-12 gap-1.5 sm:gap-2 mb-3.5 sm:mb-6">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => {
+            const isPeak = [10, 11, 12, 1, 2, 3].includes(m);
+            const isSelected = selectedMonth === m;
 
-          return (
-            <button
-              key={m}
-              type="button"
-              onClick={() => setSelectedMonth(m)}
-              className={`py-2 px-1 text-xs font-semibold rounded-lg transition-all text-center cursor-pointer ${
-                isSelected
-                  ? 'bg-emerald-800 text-white shadow-xs scale-102 ring-2 ring-emerald-600 ring-offset-1 border border-transparent'
-                  : isPeak
-                  ? 'bg-emerald-50 text-emerald-900 hover:bg-emerald-100 border border-stone-200 hover:border-[#d0fae5] font-bold'
-                  : 'bg-white text-stone-700 hover:bg-stone-100 border border-stone-200 hover:border-[#d0fae5]'
-              }`}
-            >
-              <div className="text-xs">{m}월</div>
-              <div className="text-[10px] font-medium opacity-90">
-                {isPeak ? '성수기' : '비수기'}
-              </div>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Selected Month Details Card */}
-      <div className="p-4 sm:p-5 rounded-xl bg-white border border-stone-200 hover:border-[#d0fae5] transition-colors flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <span
-              className={`px-2.5 py-0.5 text-xs font-bold rounded-md border border-stone-200 ${
-                [10, 11, 12, 1, 2, 3].includes(selectedMonth)
-                  ? 'bg-emerald-100 text-emerald-800'
-                  : 'bg-amber-100 text-amber-800'
-              }`}
-            >
-              {currentMonthInfo.season}
-            </span>
-            <span className="text-xs font-semibold text-stone-700">기온 {currentMonthInfo.temp}</span>
-          </div>
-          <p className="text-sm font-semibold text-stone-900">{currentMonthInfo.weather}</p>
+            return (
+              <button
+                key={m}
+                type="button"
+                onClick={() => setSelectedMonth(m)}
+                className={`py-2 px-0.5 text-xs font-bold rounded-xl transition-all text-center cursor-pointer ${
+                  isSelected
+                    ? 'bg-[#0f3d2e] text-white border border-[#0f3d2e] shadow-xs'
+                    : isPeak
+                    ? 'bg-[#1d6b4f]/15 text-[#10231b] border border-[#e3dfd3] hover:bg-[#1d6b4f]/25'
+                    : 'bg-white text-[#10231b] border border-[#e3dfd3] hover:bg-stone-50'
+                }`}
+              >
+                <div className="text-xs">{m}월</div>
+                <small className={`block text-[9.5px] font-normal ${isSelected ? 'text-[#cfe8dc]' : 'text-[#5d6b64]'}`}>
+                  {isPeak ? '성수기' : '비수기'}
+                </small>
+              </button>
+            );
+          })}
         </div>
-        <div className="text-xs text-stone-800 bg-stone-50 px-3.5 py-2.5 rounded-lg border border-stone-200 hover:border-[#d0fae5] transition-colors shadow-2xs font-medium">
-          💡 <strong className="font-bold">라운드 팁:</strong> {currentMonthInfo.tip}
+
+        {/* Selected Month Details (Uploaded HTML .res style on mobile) */}
+        <div className="pt-3 border-t border-[#e3dfd3]/70">
+          <div className="flex flex-wrap items-center gap-2 mb-1.5">
+            <span className="inline-block bg-[#1d6b4f]/18 text-[#1d6b4f] text-xs font-bold px-3 py-1 rounded-full">
+              {selectedMonth}월 · {[10, 11, 12, 1, 2, 3].includes(selectedMonth) ? '성수기' : '비수기'}
+            </span>
+            <span className="text-[13px] font-bold text-[#10231b]">
+              기온 {currentMonthInfo.temp}
+            </span>
+          </div>
+          <b className="block text-[15px] font-bold text-[#10231b] mt-1 mb-1">
+            {currentMonthInfo.weather}
+          </b>
+          <div className="text-[15px] md:text-[13px] text-[#5d6b64] leading-relaxed mt-1">
+            💡 <strong>라운드 팁:</strong> {currentMonthInfo.tip}
+          </div>
+          {(selectedMonth === 12 || selectedMonth <= 2) && (
+            <div className="mt-1 text-xs text-[#d9381e] font-bold">
+              극성수기(12월~2월): 명문 골프장은 40일 전 행사 확정 부탁드립니다.
+            </div>
+          )}
         </div>
       </div>
     </div>
-  </div>
-);
+  );
 };

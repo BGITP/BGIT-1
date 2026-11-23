@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <clipPath id="squircle">
+      <rect width="200" height="200" rx="44" ry="44" />
+    </clipPath>
+    <linearGradient id="sheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+  
+  <g clip-path="url(#squircle)">
+    <!-- Faceted polygon background strictly matching 20161027141628.jpg -->
+    <polygon points="0,0 80,0 40,65 0,50" fill="#69db2b" />
+    <polygon points="0,50 40,65 0,110" fill="#58d01d" />
+    <polygon points="80,0 150,0 110,55 40,65" fill="#53cf19" />
+    <polygon points="150,0 200,0 200,60 110,55" fill="#44c510" />
+    
+    <polygon points="0,110 40,65 110,55 75,125 0,140" fill="#42c50e" />
+    <polygon points="110,55 200,60 170,120 75,125" fill="#32b904" />
+    <polygon points="200,60 200,135 170,120" fill="#29af00" />
+    
+    <polygon points="0,140 75,125 50,200 0,200" fill="#2eb402" />
+    <polygon points="75,125 170,120 140,200 50,200" fill="#22a400" />
+    <polygon points="170,120 200,135 200,200 140,200" fill="#189700" />
+    
+    <!-- Ambient subtle lighting sheen -->
+    <rect width="200" height="200" fill="url(#sheen)" />
+
+    <!-- White Speech Bubble with Tail -->
+    <path d="M 38 95 C 38 61 66 36 100 36 C 134 36 162 61 162 95 C 162 129 134 154 100 154 C 89 154 79 151 70 146 L 47 161 C 43 163 41 161 42 157 L 45 139 C 40 126 38 111 38 95 Z" fill="#FFFFFF" />
+    
+    <!-- LINE Text in Green (#00c300) -->
+    <!-- L -->
+    <path d="M 62 79 L 62 113 C 62 114.5 63.5 116 65 116 L 76 116 C 77.5 116 78.5 115 78.5 113.5 C 78.5 112 77.5 111 76 111 L 68 111 L 68 79 C 68 77.5 66.5 76.5 65 76.5 C 63.5 76.5 62 77.5 62 79 Z" fill="#00C300" />
+    <!-- I -->
+    <path d="M 86 79 L 86 113 C 86 114.5 87.5 116 89 116 C 90.5 116 92 114.5 92 113 L 92 79 C 92 77.5 90.5 76.5 89 76.5 C 87.5 76.5 86 77.5 86 79 Z" fill="#00C300" />
+    <!-- N -->
+    <path d="M 100 79 L 100 113 C 100 114.5 101.5 116 103 116 C 104.2 116 105.2 115.3 106 114.2 L 118.5 96.5 L 118.5 113 C 118.5 114.5 120 116 121.5 116 C 123 116 124.5 114.5 124.5 113 L 124.5 79 C 124.5 77.5 123 76.5 121.5 76.5 C 120.3 76.5 119.3 77.2 118.5 78.3 L 106 96 L 106 79 C 106 77.5 104.5 76.5 103 76.5 C 101.5 76.5 100 77.5 100 79 Z" fill="#00C300" />
+    <!-- E -->
+    <path d="M 132 79 L 132 113 C 132 114.5 133.5 116 135 116 L 146 116 C 147.5 116 148.5 115 148.5 113.5 C 148.5 112 147.5 111 146 111 L 138 111 L 138 99.5 L 145 99.5 C 146.5 99.5 147.5 98.5 147.5 97 C 147.5 95.5 146.5 94.5 145 94.5 L 138 94.5 L 138 82.5 L 146 82.5 C 147.5 82.5 148.5 81.5 148.5 80 C 148.5 78.5 147.5 77.5 146 77.5 L 135 77.5 C 133.5 77.5 132 78.5 132 79 Z" fill="#00C300" />
+  </g>
+</svg>

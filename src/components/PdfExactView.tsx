@@ -2,6 +2,7 @@ import React from 'react';
 import { GOLF_REGIONS, GOLF_PACKAGES, COMPANY_INFO } from '../data/golfData';
 import { GolfPackage } from '../types/golf';
 import { Printer, Download, ArrowLeft, ExternalLink } from 'lucide-react';
+import { downloadOriginalPdf } from '../utils/pdfDownload';
 
 interface PdfExactViewProps {
   onSelectPackage: (pkg: GolfPackage) => void;
@@ -14,13 +15,11 @@ export const PdfExactView: React.FC<PdfExactViewProps> = ({
   onOpenReservation,
   onBackToInteractive,
 }) => {
-  const handleDownloadOriginalPdf = () => {
-    const link = document.createElement('a');
-    link.href = COMPANY_INFO.pdfPath;
-    link.download = 'BGIT_태국골프노트_가이드북.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownloadOriginalPdf = async () => {
+    await downloadOriginalPdf(
+      COMPANY_INFO.pdfPath,
+      'BGIT_태국골프노트_가이드북.pdf'
+    );
   };
 
   const handlePrint = () => {

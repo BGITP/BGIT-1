@@ -15,7 +15,7 @@ export const KakaoShareModal: React.FC<KakaoShareModalProps> = ({ isOpen, onClos
 
   const currentUrl = typeof window !== 'undefined' ? window.location.href : 'https://bgitthai.golf';
 
-  const shareText = `[BGIT Thai - 태국 현지 골프 전문회사]
+  const shareText = `[BGIT Thai - 태국현지 골프여행 전문 랜딩사]
 ${COMPANY_INFO.announcement}
 
 ▶ 골프 패키지 & 지역별 스코어카드 확인:
@@ -79,10 +79,10 @@ ${currentUrl}
             {/* Kakao Shared URL Card */}
             <div className="max-w-xs sm:max-w-sm ml-auto bg-white rounded-2xl overflow-hidden shadow-md border border-stone-200">
               {/* OG Image: BGIT Thai Official Logo */}
-              <div className="relative aspect-[1.91/1] bg-white border-b border-stone-100 flex items-center justify-center p-3 overflow-hidden">
+              <div className="relative aspect-[1.91/1] bg-white border-b border-stone-100 flex items-center justify-center overflow-hidden">
                 <img
-                  src={COMPANY_INFO.logoShield}
-                  alt="BGIT Thai 로고"
+                  src="/bgit-kakao-preview-2026.png?v=20261113"
+                  alt="BGIT THAI 공식 로고"
                   className="w-full h-full object-contain object-center"
                   referrerPolicy="no-referrer"
                 />

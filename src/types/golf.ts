@@ -20,6 +20,7 @@ export type PackageCategory =
   | 'pattaya-golftel'
   | 'bangkok-value' 
   | 'bangkok-luxury' 
+  | 'vehicle-guide'
   | 'entry-meeting-schedule'
   | 'guide';
 
