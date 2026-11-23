@@ -1,6 +1,6 @@
 {
   "name": "BGIT Thai - 태국 현지 골프 전문회사",
-  "description": "BGIT는 태국현지 골프여행 랜딩사 입니다. 방콕 파타야 골프여행의 모든 선택지를 BGIT에 맡기세요!",
+  "description": "BGIT는 태국현지 골프여행 랜드사 입니다. 방콕 파타야 골프여행의 모든 선택지를 BGIT에 맡기세요!",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

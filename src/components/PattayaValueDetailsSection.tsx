@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import {
   PATTAYA_VALUE_HOTELS,
   PATTAYA_VALUE_GOLF_COURSES,
+  PattayaHotelInfo,
+  PattayaGolfCourseInfo,
 } from '../data/pattayaValueDetailsData';
 import {
   Building2,
@@ -16,7 +18,15 @@ import {
   ChevronUp,
 } from 'lucide-react';
 
-export const PattayaValueDetailsSection: React.FC = () => {
+interface PattayaValueDetailsSectionProps {
+  hotels?: PattayaHotelInfo[];
+  golfCourses?: PattayaGolfCourseInfo[];
+}
+
+export const PattayaValueDetailsSection: React.FC<PattayaValueDetailsSectionProps> = ({
+  hotels = PATTAYA_VALUE_HOTELS,
+  golfCourses = PATTAYA_VALUE_GOLF_COURSES,
+}) => {
   const [expandedHotels, setExpandedHotels] = useState<Record<string, boolean>>({});
   const [expandedCourses, setExpandedCourses] = useState<Record<string, boolean>>({});
 
@@ -48,7 +58,7 @@ export const PattayaValueDetailsSection: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
-          {PATTAYA_VALUE_HOTELS.map((hotel) => {
+          {hotels.map((hotel) => {
             const isExpanded = Boolean(expandedHotels[hotel.id]);
 
             return (
@@ -66,26 +76,34 @@ export const PattayaValueDetailsSection: React.FC = () => {
                       referrerPolicy="no-referrer"
                     />
                   </div>
-                  <div className="flex items-center gap-1.5 w-full">
-                    <a
-                      href={hotel.homepageUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg bg-white hover:bg-stone-50 text-stone-800 hover:text-[#0f3d2e] border !border-[#c7c2b7] text-[11px] xl:text-[11.5px] font-normal transition-colors whitespace-nowrap"
-                    >
-                      <Globe className="w-3.5 h-3.5 text-[#1d6b4f] stroke-[2] shrink-0" />
-                      <span>홈페이지</span>
-                    </a>
-                    <a
-                      href={hotel.photoDownloadUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 lg:flex-initial inline-flex items-center justify-center gap-1 px-2 xl:px-2.5 py-1.5 rounded-lg bg-white hover:bg-stone-50 text-stone-800 hover:text-[#0f3d2e] border !border-[#c7c2b7] text-[11px] xl:text-[11.5px] font-normal transition-colors whitespace-nowrap"
-                    >
-                      <Images className="w-3.5 h-3.5 stroke-[2] shrink-0 text-[#1d6b4f]" />
-                      <span>사진다운로드</span>
-                    </a>
-                  </div>
+                  {(hotel.homepageUrl || hotel.photoDownloadUrl) && (
+                    <div className="flex items-center gap-1.5 w-full">
+                      {hotel.homepageUrl && (
+                        <a
+                          href={hotel.homepageUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 inline-flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg bg-white hover:bg-stone-50 text-stone-800 hover:text-[#0f3d2e] border !border-[#c7c2b7] text-[11px] xl:text-[11.5px] font-normal transition-colors whitespace-nowrap"
+                        >
+                          <Globe className="w-3.5 h-3.5 text-[#1d6b4f] stroke-[2] shrink-0" />
+                          <span>홈페이지</span>
+                        </a>
+                      )}
+                      {hotel.photoDownloadUrl && (
+                        <a
+                          href={hotel.photoDownloadUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`${
+                            hotel.homepageUrl ? 'flex-1 lg:flex-initial' : 'flex-1'
+                          } inline-flex items-center justify-center gap-1 px-2 xl:px-2.5 py-1.5 rounded-lg bg-white hover:bg-stone-50 text-stone-800 hover:text-[#0f3d2e] border !border-[#c7c2b7] text-[11px] xl:text-[11.5px] font-normal transition-colors whitespace-nowrap`}
+                        >
+                          <Images className="w-3.5 h-3.5 stroke-[2] shrink-0 text-[#1d6b4f]" />
+                          <span>사진다운로드</span>
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Details */}
@@ -116,7 +134,7 @@ export const PattayaValueDetailsSection: React.FC = () => {
                     {hotel.description}
                   </p>
 
-                  {isExpanded && (
+                  {isExpanded && hotel.roomInfo && (
                     <div className="pt-2.5 border-t border-stone-100 flex items-center gap-2 text-[13px] sm:text-[13.5px] text-stone-800">
                       <BedDouble className="w-4 h-4 text-[#1d6b4f] shrink-0" />
                       <span className="font-semibold text-stone-900">기본객실 :</span>
@@ -158,7 +176,7 @@ export const PattayaValueDetailsSection: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
-          {PATTAYA_VALUE_GOLF_COURSES.map((course) => {
+          {golfCourses.map((course) => {
             const isExpanded = Boolean(expandedCourses[course.id]);
 
             return (
@@ -176,26 +194,34 @@ export const PattayaValueDetailsSection: React.FC = () => {
                       referrerPolicy="no-referrer"
                     />
                   </div>
-                  <div className="flex items-center gap-1.5 w-full">
-                    <a
-                      href={course.homepageUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg bg-white hover:bg-stone-50 text-stone-800 hover:text-[#0f3d2e] border !border-[#c7c2b7] text-[11px] xl:text-[11.5px] font-normal transition-colors whitespace-nowrap"
-                    >
-                      <Globe className="w-3.5 h-3.5 text-[#1d6b4f] stroke-[2] shrink-0" />
-                      <span>홈페이지</span>
-                    </a>
-                    <a
-                      href={course.photoDownloadUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 lg:flex-initial inline-flex items-center justify-center gap-1 px-2 xl:px-2.5 py-1.5 rounded-lg bg-white hover:bg-stone-50 text-stone-800 hover:text-[#0f3d2e] border !border-[#c7c2b7] text-[11px] xl:text-[11.5px] font-normal transition-colors whitespace-nowrap"
-                    >
-                      <Images className="w-3.5 h-3.5 stroke-[2] shrink-0 text-[#1d6b4f]" />
-                      <span>사진다운로드</span>
-                    </a>
-                  </div>
+                  {(course.homepageUrl || course.photoDownloadUrl) && (
+                    <div className="flex items-center gap-1.5 w-full">
+                      {course.homepageUrl && (
+                        <a
+                          href={course.homepageUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 inline-flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg bg-white hover:bg-stone-50 text-stone-800 hover:text-[#0f3d2e] border !border-[#c7c2b7] text-[11px] xl:text-[11.5px] font-normal transition-colors whitespace-nowrap"
+                        >
+                          <Globe className="w-3.5 h-3.5 text-[#1d6b4f] stroke-[2] shrink-0" />
+                          <span>홈페이지</span>
+                        </a>
+                      )}
+                      {course.photoDownloadUrl && (
+                        <a
+                          href={course.photoDownloadUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`${
+                            course.homepageUrl ? 'flex-1 lg:flex-initial' : 'flex-1'
+                          } inline-flex items-center justify-center gap-1 px-2 xl:px-2.5 py-1.5 rounded-lg bg-white hover:bg-stone-50 text-stone-800 hover:text-[#0f3d2e] border !border-[#c7c2b7] text-[11px] xl:text-[11.5px] font-normal transition-colors whitespace-nowrap`}
+                        >
+                          <Images className="w-3.5 h-3.5 stroke-[2] shrink-0 text-[#1d6b4f]" />
+                          <span>사진다운로드</span>
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Details */}

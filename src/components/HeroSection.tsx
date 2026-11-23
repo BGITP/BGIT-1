@@ -63,7 +63,7 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
             {/* Main Title */}
             <h1 className="text-[clamp(20px,5.6vw,25px)] leading-[1.28] font-extrabold tracking-[-0.025em] text-white">
               태국현지 골프여행{' '}
-              <em className="not-italic text-[#f3d692]">전문 랜딩사 BGIT</em>
+              <em className="not-italic text-[#f3d692]">전문 랜드사 BGIT</em>
             </h1>
 
             {/* Editorial hairline rule */}

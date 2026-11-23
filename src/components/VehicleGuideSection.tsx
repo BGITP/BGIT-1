@@ -2,12 +2,8 @@ import React from 'react';
 import {
   Car,
   UserCheck,
-  Clock,
-  ShieldCheck,
-  Users,
   Headphones,
   MapPin,
-  PlaneLanding,
   CheckCircle2,
   MessageCircle,
   Phone,
@@ -20,26 +16,96 @@ interface VehicleGuideSectionProps {
   onGoToGuide?: (targetId?: 'tdac-guide' | 'airport-guide') => void;
 }
 
-const VEHICLE_POLICIES = [
+const VEHICLE_RENTAL_RATES = [
   {
-    icon: ShieldCheck,
-    title: '100% 프라이빗 단독 배차',
-    desc: '방콕 수완나품 공항 미팅부터 호텔·골프장·식당 이동 및 귀국 샌딩까지 타 일행과 섞이지 않는 단독 차량이 배정됩니다.',
+    id: 'compact',
+    name: '소형차',
+    subtitle: '승객 최대 3명 · 세단',
+    image: '/assets/aistudio/____4facbbc4.jpg',
+    rates: [
+      { label: 'DMK AIR - 파타야', price: '1,500 바트' },
+      { label: 'BKK AIR - 파타야', price: '1,300 바트' },
+      { label: '1일 (12시간 기준)', price: '2,700 바트' },
+      { label: '3박4일', price: '11,000 바트' },
+    ],
   },
   {
-    icon: Clock,
-    title: '기본 운행 시간 (오후 8시 전후)',
-    desc: '차량은 저녁 식사를 마치는 오후 8시 전후까지 운행됩니다. 야간 추가 이용을 원하실 경우 현지 매니저와 사전에 상의해 주세요.',
+    id: 'midsize',
+    name: '중형차',
+    subtitle: '승객 최대 3명 · 세단',
+    image: '/assets/aistudio/____cff527b8.jpg',
+    rates: [
+      { label: 'DMK AIR - 파타야', price: '1,700 바트' },
+      { label: 'BKK AIR - 파타야', price: '1,600 바트' },
+      { label: '1일 (12시간 기준)', price: '2,800 바트' },
+      { label: '3박4일', price: '11,500 바트' },
+    ],
   },
   {
-    icon: Users,
-    title: '4인 출발 기준 · 소인원 맞춤 조율',
-    desc: '기본 상품은 4인 출발 기준입니다. 4인 미만 예약 시에는 차량 구성 및 조인 여부에 따라 별도 안내로 맞춤 조율해 드립니다.',
+    id: 'suv',
+    name: 'SUV',
+    subtitle: '승객 최대 5명 · 7인승 SUV',
+    image: '/assets/aistudio/suv_911d7ab9.jpg',
+    rates: [
+      { label: 'DMK AIR - 파타야', price: '2,100 바트' },
+      { label: 'BKK AIR - 파타야', price: '2,000 바트' },
+      { label: '1일 (12시간 기준)', price: '3,000 바트' },
+      { label: '3박4일', price: '12,000 바트' },
+    ],
   },
   {
-    icon: PlaneLanding,
-    title: '공항 미팅 & 공항 샌딩 포함',
-    desc: '행사 3박 4일 이상 차량 사용 시 공항 미팅·샌딩 비용(1인당 50달러)이 상품 내역에 기본 포함되어 편리하게 이동할 수 있습니다.',
+    id: 'van',
+    name: '승합차',
+    subtitle: '승객 최대 9~10명 · 밴',
+    image: '/assets/aistudio/____880922ba.jpg',
+    rates: [
+      { label: 'DMK AIR - 파타야', price: '2,400 바트' },
+      { label: 'BKK AIR - 파타야', price: '2,300 바트' },
+      { label: '1일 (12시간 기준)', price: '3,200 바트' },
+      { label: '3박4일', price: '12,800 바트' },
+    ],
+  },
+];
+
+const VEHICLE_RENTAL_NOTES = [
+  '연료비와 기사님 식사비가 모두 포함된 요금입니다.',
+  '초과 시간은 1시간당 추가 요금이 적용됩니다.',
+  '고속도로 통행료·주차비는 별도이며, 실비로 정산됩니다.',
+  '픽업은 항공편 도착 시간에 맞춰 대기하며, 지연 시에도 추가 요금이 없습니다.',
+];
+
+const GUIDE_RATES = [
+  {
+    id: 'bangkok',
+    region: '방콕',
+    rates: [
+      { label: '1일 (10시간 기준)', price: '3,000 바트' },
+      { label: '3박4일', price: '12,000 바트' },
+    ],
+  },
+  {
+    id: 'pattaya',
+    region: '파타야',
+    rates: [
+      { label: '1일 (10시간 기준)', price: '3,000 바트' },
+      { label: '3박4일', price: '12,000 바트' },
+    ],
+  },
+  {
+    id: 'huahin-ayutthaya',
+    region: '후아힌 · 아유타야',
+    rates: [
+      { label: '1일 (10시간 기준)', price: '4,000 바트' },
+      { label: '3박4일', price: '15,000 바트' },
+    ],
+  },
+  {
+    id: 'laos',
+    region: '라오스',
+    rates: [
+      { label: '1일 (10시간 기준)', price: '4,500 바트' },
+      { label: '3박4일', price: '18,000 바트' },
+    ],
   },
 ];
 
@@ -76,61 +142,98 @@ export const VehicleGuideSection: React.FC<VehicleGuideSectionProps> = ({
       className="pt-2 pb-12 sm:pb-16 bg-[#f6f4ee] md:bg-white scroll-mt-24"
     >
       <div className="max-w-[1156px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-        {/* 01. VIP 단독 전용차량 안내 */}
-        <div className="bg-white rounded-[24px] border border-stone-200/90 shadow-[0_6px_28px_rgba(15,61,46,0.04)] overflow-hidden">
-          <div className="bg-[#faf9f6] border-b border-stone-200/80 px-5 sm:px-8 py-4 sm:py-5 flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#0f3d2e] text-[#f0d28d] flex items-center justify-center font-extrabold text-sm tracking-tight shrink-0">
-                01
-              </div>
-              <div>
-                <span className="block text-[11px] font-semibold tracking-wide text-[#e05638]">
-                  VIP 단독 전용차량 &amp; 기사 풀서비스
-                </span>
-                <h2 className="text-base sm:text-[17px] font-bold text-[#10231b] tracking-tight">
-                  전용 차량 운행 기준 및 이용 안내
-                </h2>
-              </div>
-            </div>
-            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1d6b4f]">
-              <Car className="w-4 h-4 shrink-0" />
-              <span>타 일행 동승 없는 단독 배차</span>
-            </span>
+        {/* 차량+기사 렌트 요금 */}
+        <div className="space-y-4">
+          <h2 className="text-[18px] sm:text-[20px] font-bold text-[#10231b] tracking-tight flex items-center gap-2">
+            <Car className="w-5 h-5 text-[#154738] stroke-[2]" />
+            <span>차량+기사 렌트 요금</span>
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+            {VEHICLE_RENTAL_RATES.map((vehicle) => (
+              <article
+                key={vehicle.id}
+                className="bg-white rounded-2xl border border-stone-200/90 shadow-2xs overflow-hidden flex flex-col h-full"
+              >
+                <div className="w-full aspect-[16/10] bg-white overflow-hidden">
+                  <img
+                    src={vehicle.image}
+                    alt={`${vehicle.name} (${vehicle.subtitle})`}
+                    className="w-full h-full object-contain object-center"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+
+                <div className="p-4 sm:p-5 flex-1 flex flex-col">
+                  <h3 className="text-[16px] font-bold text-[#10231b] leading-snug">
+                    {vehicle.name}
+                  </h3>
+                  <p className="text-[12.5px] font-normal text-stone-500 mt-0.5 mb-3">
+                    {vehicle.subtitle}
+                  </p>
+
+                  <div className="divide-y divide-stone-100 border-t border-stone-100 mt-auto">
+                    {vehicle.rates.map((rate) => (
+                      <div
+                        key={rate.label}
+                        className="py-2 flex items-center justify-between gap-2 text-[13px]"
+                      >
+                        <span className="text-stone-600">{rate.label}</span>
+                        <span className="font-bold text-[#10231b] whitespace-nowrap">
+                          {rate.price}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
 
-          <div className="p-5 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-            <div className="lg:col-span-5 rounded-2xl overflow-hidden bg-stone-100 border border-stone-200/70 aspect-[16/10] lg:aspect-auto lg:min-h-[260px]">
-              <img
-                src="/assets/aistudio/________b9162fbf.jpg"
-                alt="VIP 단독 전용차량 & 기사 풀서비스"
-                className="w-full h-full object-cover object-center"
-                referrerPolicy="no-referrer"
-              />
-            </div>
+          <div className="bg-white rounded-2xl border border-stone-200/90 shadow-2xs px-5 sm:px-7 py-4 sm:py-5">
+            <h3 className="text-[13.5px] font-bold text-[#10231b] mb-2">
+              안내 사항
+            </h3>
+            <ul className="list-disc pl-5 space-y-1 text-[13px] text-stone-600 leading-relaxed">
+              {VEHICLE_RENTAL_NOTES.map((note) => (
+                <li key={note}>{note}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
 
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
-              {VEHICLE_POLICIES.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div
-                    key={item.title}
-                    className="bg-[#faf9f6] rounded-2xl p-4 sm:p-4.5 border border-stone-200/70 flex flex-col gap-2"
-                  >
-                    <div className="flex items-center gap-2">
-                      <span className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200/80 flex items-center justify-center text-[#1d6b4f] shrink-0">
-                        <Icon className="w-4 h-4 stroke-[2.2]" />
+        {/* 가이드 요금 */}
+        <div className="space-y-4">
+          <h2 className="text-[18px] sm:text-[20px] font-bold text-[#10231b] tracking-tight flex items-center gap-2">
+            <MapPin className="w-5 h-5 text-[#154738] stroke-[2]" />
+            <span>가이드 요금</span>
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+            {GUIDE_RATES.map((guide) => (
+              <article
+                key={guide.id}
+                className="bg-white rounded-2xl border border-stone-200/90 shadow-2xs p-4 sm:p-5 flex flex-col"
+              >
+                <h3 className="text-[16px] font-bold text-[#10231b] mb-3">
+                  {guide.region}
+                </h3>
+
+                <div className="divide-y divide-stone-100 border-t border-stone-100">
+                  {guide.rates.map((rate) => (
+                    <div
+                      key={rate.label}
+                      className="py-2 flex items-center justify-between gap-2 text-[13px]"
+                    >
+                      <span className="text-stone-600">{rate.label}</span>
+                      <span className="font-bold text-[#10231b] whitespace-nowrap">
+                        {rate.price}
                       </span>
-                      <h3 className="text-[14.5px] font-bold text-[#10231b] leading-snug">
-                        {item.title}
-                      </h3>
                     </div>
-                    <p className="text-[13px] sm:text-[13.5px] text-stone-600 leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
+                  ))}
+                </div>
+              </article>
+            ))}
           </div>
         </div>
 
@@ -159,7 +262,7 @@ export const VehicleGuideSection: React.FC<VehicleGuideSectionProps> = ({
           <div className="p-5 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
             <div className="lg:col-span-5 rounded-2xl overflow-hidden bg-stone-100 border border-stone-200/70 aspect-[16/10] lg:aspect-auto lg:min-h-[250px]">
               <img
-                src="/assets/aistudio/_____24______9cc3137b.jpg"
+                src="/assets/aistudio/Explaining_schedule_to_golf_guests_f02dacc8_029594bd.jpg"
                 alt="매니저와 24시간 소통, 실시간 케어"
                 className="w-full h-full object-cover object-center"
                 referrerPolicy="no-referrer"

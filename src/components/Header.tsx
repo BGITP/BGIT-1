@@ -42,7 +42,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenReservation: _onOpenReserv
 
               <div className="hidden md:flex flex-col justify-center border-l-[3px] border-stone-300 pl-5 py-0.5 min-w-0 translate-y-[7px]">
                 <p className="text-[15px] font-semibold text-stone-800 leading-snug">
-                  태국현지 골프여행 랜딩사
+                  태국현지 골프여행 랜드사
                 </p>
               </div>
             </div>

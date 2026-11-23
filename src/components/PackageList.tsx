@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { GOLF_PACKAGES, COMPANY_INFO, NOTICES_PEAK_SEASON } from '../data/golfData';
 import { GolfPackage, PackageCategory } from '../types/golf';
 import {
@@ -43,9 +43,11 @@ export const PackageList: React.FC<PackageListProps> = ({
   const [previewVideo, setPreviewVideo] = useState<YouTubeShortsItem | null>(null);
   const [videoOrientation, setVideoOrientation] = useState<'portrait' | 'landscape' | null>(null);
   const [isMp4Expanded, setIsMp4Expanded] = useState(false);
+  const [playingMp4Ids, setPlayingMp4Ids] = useState<Record<number, boolean>>({});
+  const desktopVideoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
   const [isPeakNoticeOpen, setIsPeakNoticeOpen] = useState(false);
   const [downloadingPdfId, setDownloadingPdfId] = useState<string | null>(null);
-  const displayedMp4Items = isMp4Expanded ? INITIAL_YOUTUBE_SHORTS : INITIAL_YOUTUBE_SHORTS.slice(0, 3);
+  const displayedMp4Items = isMp4Expanded ? INITIAL_YOUTUBE_SHORTS : INITIAL_YOUTUBE_SHORTS.slice(0, 4);
 
   useEffect(() => {
     setVideoOrientation(null);
@@ -590,48 +592,64 @@ export const PackageList: React.FC<PackageListProps> = ({
               </div>
             </div>
 
-            {/* Desktop View: 3-Column Card Grid matching image_80419d86.png */}
+            {/* Desktop View: 4-Column Portrait Video Card Grid */}
             <div className="hidden md:block mb-8">
-              <div className="grid grid-cols-3 gap-5 sm:gap-6">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
                 {displayedMp4Items.map((item) => {
-                  const videoId = getYouTubeVideoId(item.videoId);
+                  const isPlaying = Boolean(playingMp4Ids[item.id]);
                   return (
                     <div
                       key={`d-mp4-${item.id}`}
-                      className="rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 bg-white border border-stone-200 flex flex-col"
+                      className="relative aspect-[9/14] w-full rounded-2xl overflow-hidden bg-black shadow-md hover:shadow-xl transition-shadow duration-300 select-none"
                     >
-                      <div className="relative aspect-[20/21] w-full bg-stone-900 overflow-hidden select-none">
-                        <video
-                          src={`${item.mp4Path}#t=0.1`}
-                          poster={`https://i.ytimg.com/vi/${videoId}/oar2.jpg`}
-                          muted
-                          playsInline
-                          preload="metadata"
-                          className="w-full h-full object-cover pointer-events-none select-none"
-                        />
-                        <div className="absolute inset-0 bg-black/10 flex items-center justify-center pointer-events-none">
+                      <video
+                        ref={(el) => {
+                          desktopVideoRefs.current[item.id] = el;
+                        }}
+                        src={`${item.mp4Path}#t=0.1`}
+                        controls
+                        playsInline
+                        preload="metadata"
+                        onPlay={() =>
+                          setPlayingMp4Ids((prev) => ({ ...prev, [item.id]: true }))
+                        }
+                        onPause={() =>
+                          setPlayingMp4Ids((prev) => ({ ...prev, [item.id]: false }))
+                        }
+                        onEnded={() =>
+                          setPlayingMp4Ids((prev) => ({ ...prev, [item.id]: false }))
+                        }
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/65 via-black/25 to-transparent" />
+                      <span className="pointer-events-none absolute top-3 left-3.5 right-3.5 text-[13px] font-bold text-white truncate drop-shadow-sm">
+                        {item.title}
+                      </span>
+
+                      {!isPlaying && (
+                        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
                           <button
                             type="button"
-                            onClick={() => setPreviewVideo(item)}
-                            className="pointer-events-auto w-14 h-14 rounded-full bg-black/45 hover:bg-emerald-700 text-white backdrop-blur-md outline-none focus:outline-none shadow-[0_8px_28px_rgba(0,0,0,0.35)] flex items-center justify-center transition-all duration-200 cursor-pointer hover:scale-110 active:scale-95"
+                            onClick={() => {
+                              const vid = desktopVideoRefs.current[item.id];
+                              if (vid) {
+                                vid.play().catch(() => {});
+                              }
+                            }}
+                            className="pointer-events-auto w-12 h-12 rounded-full bg-black/55 hover:bg-black/75 text-white flex items-center justify-center transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 shadow-lg"
                             aria-label={`${item.title} 재생`}
                             title={`${item.title} 재생`}
                           >
-                            <Play className="w-5.5 h-5.5 fill-white text-white translate-x-[1.5px]" />
+                            <Play className="w-5 h-5 fill-white text-white translate-x-[1.5px]" />
                           </button>
                         </div>
-                      </div>
-                      <div className="px-4 py-3 bg-white border-t border-stone-100">
-                        <span className="block text-[13px] sm:text-[14px] font-semibold text-stone-800 truncate">
-                          {item.title}
-                        </span>
-                      </div>
+                      )}
                     </div>
                   );
                 })}
               </div>
 
-              {INITIAL_YOUTUBE_SHORTS.length > 3 && (
+              {INITIAL_YOUTUBE_SHORTS.length > 4 && (
                 <div className="mt-7 sm:mt-8 flex justify-center">
                   <button
                     type="button"

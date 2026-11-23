@@ -4,7 +4,7 @@ export const COMPANY_INFO = {
   name: 'BGIT Thai',
   fullName: 'BGIT Thai Travel Co., Ltd.',
   slogan: 'Join With Thai Golfer / All Golf Service',
-  subtitle: '태국현지 골프여행 전문 랜딩사',
+  subtitle: '태국현지 골프여행 전문 랜드사',
   address: '99/278 Supalai Park Ville, Moo1, Highway No.345, Lampho, Bangbuathong, Nonthaburi 11110, Thailand.',
   tel: '+66965145747',
   telDisplay: '+66 96 514 5747',
@@ -17,7 +17,7 @@ export const COMPANY_INFO = {
   badgeLogo: '/assets/aistudio/_______1111_29bfb2f8.jpg',
   logoShield: '/assets/aistudio/_______1111_29bfb2f8.jpg',
   brandTextImage: '/assets/aistudio/5555_27c4844a.png',
-  announcement: 'BGIT는 태국현지 골프여행 랜딩사 입니다. 방콕 파타야 골프여행의 모든 선택지를 BGIT에 맡기세요!',
+  announcement: 'BGIT는 태국현지 골프여행 랜드사 입니다. 방콕 파타야 골프여행의 모든 선택지를 BGIT에 맡기세요!',
 };
 
 export const GOLF_REGIONS: GolfRegion[] = [
@@ -1003,8 +1003,8 @@ export const GOLF_PACKAGES: GolfPackage[] = [
 
 export const BGIT_DIFFERENTIATORS = [
   {
-    title: '태국현지 골프여행 전문 랜딩사',
-    desc: 'BGIT는 태국현지 골프여행 랜딩사 입니다. 방콕 파타야 골프여행의 모든 선택지를 BGIT에 맡기세요!',
+    title: '태국현지 골프여행 전문 랜드사',
+    desc: 'BGIT는 태국현지 골프여행 랜드사 입니다. 방콕 파타야 골프여행의 모든 선택지를 BGIT에 맡기세요!',
   },
   {
     title: 'VIP 단독 전용차량 & 기사 풀서비스',

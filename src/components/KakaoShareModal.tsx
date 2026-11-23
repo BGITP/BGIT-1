@@ -15,7 +15,7 @@ export const KakaoShareModal: React.FC<KakaoShareModalProps> = ({ isOpen, onClos
 
   const currentUrl = typeof window !== 'undefined' ? window.location.href : 'https://bgitthai.golf';
 
-  const shareText = `[BGIT Thai - 태국현지 골프여행 전문 랜딩사]
+  const shareText = `[BGIT Thai - 태국현지 골프여행 전문 랜드사]
 ${COMPANY_INFO.announcement}
 
 ▶ 골프 패키지 & 지역별 스코어카드 확인:

@@ -14,9 +14,9 @@ const FEATURE_CARDS: FeatureCardItem[] = [
   {
     id: 'agency',
     image: '/assets/features/bgit_feature_agency.jpg',
-    imageAlt: '태국현지 골프여행 전문 랜딩사',
+    imageAlt: '태국현지 골프여행 전문 랜드사',
     icon: ShieldCheck,
-    title: '태국현지 골프여행 전문 랜딩사',
+    title: '태국현지 골프여행 전문 랜드사',
     descriptionHtml:
       '한국 주요 여행사들이 신뢰하는 태국 골프 전문 랜드사 BGIT 무결점 현지 케어를 추구하여, <strong class="font-bold text-[#10231b]">한 번 다녀간 고객이 귀사의 단골이 되는 확실한 경쟁력</strong>을 만들어 드립니다.',
   },

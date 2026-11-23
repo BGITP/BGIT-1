@@ -46,9 +46,9 @@ const DESKTOP_FEATURE_CARDS: DesktopFeatureCard[] = [
   {
     id: 'agency',
     image: '/assets/aistudio/1212_28075d46.jpg',
-    imageAlt: '태국현지 골프여행 전문 랜딩사',
+    imageAlt: '태국현지 골프여행 전문 랜드사',
     icon: ShieldCheck,
-    title: '태국현지 골프여행 전문 랜딩사',
+    title: '태국현지 골프여행 전문 랜드사',
     description: (
       <>
         한국 주요 여행사들이 신뢰하는 태국 골프 전문 랜드사 BGIT

@@ -51,9 +51,10 @@ interface PdfJsRuntime {
 let pdfJsPromise: Promise<PdfJsRuntime> | null = null;
 function loadPdfJs(): Promise<PdfJsRuntime> {
   if (!pdfJsPromise) {
-    const moduleUrl = '/vendor/pdfjs/pdf.min.mjs';
+    const base = import.meta.env.BASE_URL || '/';
+    const moduleUrl = `${base}assets/vendor/pdfjs/pdf.min.mjs`;
     pdfJsPromise = (import(/* @vite-ignore */ moduleUrl) as Promise<PdfJsRuntime>).then((lib) => {
-      lib.GlobalWorkerOptions.workerSrc = '/vendor/pdfjs/pdf.worker.min.mjs';
+      lib.GlobalWorkerOptions.workerSrc = `${base}assets/vendor/pdfjs/pdf.worker.min.mjs`;
       return lib;
     });
   }
