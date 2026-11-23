@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Fix all public asset paths
         run: |
-          find src index.html -type f -exec sed -i 's|"/assets/|"/BGIT-1/assets/|g; s|'\''/assets/|'\''/BGIT-1/assets/|g; s|"/logo|"/BGIT-1/logo|g; s|'\''/logo|'\''/BGIT-1/logo|g' {} +
+          find src index.html -type f -exec sed -i -E 's|(["'\''])/(assets|logo|kakao|email|mail|icon|icons|img|images|bgit|og-|favicon)|"\1/BGIT-1/\2|g; s|^"(["'\''])/BGIT-1/|\1/BGIT-1/|g' {} +
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
       - name: Install dependencies
