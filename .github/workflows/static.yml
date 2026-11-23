@@ -10,21 +10,30 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Fix all public asset paths
         run: |
-          find src index.html -type f -exec sed -i -E 's|(["'\''])/(assets|logo|kakao|email|mail|icon|icons|img|images|bgit|og-|favicon)|"\1/BGIT-1/\2|g; s|^"(["'\''])/BGIT-1/|\1/BGIT-1/|g' {} +
+          find src index.html -type f -exec sed -i -E 's#(["'\''`])/(assets|logo|kakao|email|mail|icon|icons|img|images|bgit|og-|favicon)#\1/BGIT-1/\2#g; s#(["'\''`])/BGIT-1/BGIT-1/#\1/BGIT-1/#g' {} +
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
+
       - name: Install dependencies
         run: bun install
+
       - name: Build
-        run: bun run build -- --base=/BGIT-1/
+        run: bun run build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
