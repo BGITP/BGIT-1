@@ -16,8 +16,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Fix image paths
-        run: find src -type f \( -name "*.ts" -o -name "*.tsx" \) -exec sed -i 's|/assets/aistudio/|/BGIT-1/assets/aistudio/|g' {} +
+      - name: Fix all public asset paths
+        run: |
+          find src index.html -type f -exec sed -i 's|"/assets/|"/BGIT-1/assets/|g; s|'\''/assets/|'\''/BGIT-1/assets/|g; s|"/logo|"/BGIT-1/logo|g; s|'\''/logo|'\''/BGIT-1/logo|g' {} +
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
       - name: Install dependencies
