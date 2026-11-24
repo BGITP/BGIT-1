@@ -191,7 +191,7 @@ export const PackageList: React.FC<PackageListProps> = ({
 
         {/* Category Pills: Hidden on mobile (handled by HeroSection menu), visible on desktop full-width single row */}
         <div
-          className="hidden md:flex items-center w-full flex-nowrap gap-1.5 lg:gap-2 mb-5 py-1.5 overflow-x-auto lg:overflow-visible scrollbar-none"
+          className="hidden md:flex items-center w-full flex-nowrap gap-1.5 lg:gap-2 mb-[39px] py-1.5 overflow-x-auto lg:overflow-visible scrollbar-none"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {categories.map((cat) => {

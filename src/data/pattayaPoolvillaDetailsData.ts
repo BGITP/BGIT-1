@@ -63,7 +63,7 @@ export const PATTAYA_POOLVILLA_GOLF_COURSES: PattayaGolfCourseInfo[] = [
     feature:
       '시암롤링힐스, 워터사이드, 플렌테이션이 있으며, 롤링힐스가 비교적 최근에 오픈한 코스로 골프장 명칭처럼 약간의 언덕이 있습니다. 전체적으로 시암은 다 관리가 잘되어 있는 편입니다. 단 시암골프장의 경우 전동카트가 페어웨이 진입이 안 되기 때문에 다른 골프장들보다 힘들 수 있습니다.',
     rateInfo:
-      '주중 - 별도문의 / 그린 캐디 카트  포함\n주말 - 별도문의 / 그린 캐디 카트  포함',
+      '주중 - 5,200 바트 (올드 5,900) / 그린 캐디 카트  포함\n주말 - 6,100 바트 (올드 7,100) / 그린 캐디 카트  포함',
   },
   {
     id: 'chee-chan-golf-poolvilla',
@@ -82,7 +82,7 @@ export const PATTAYA_POOLVILLA_GOLF_COURSES: PattayaGolfCourseInfo[] = [
     feature:
       '황금절벽사원 아래에 있는 골프장으로 다른 골프장들과 달리 티타임 간격이 10분입니다. 그렇기 때문에 지금도 티타임이 제대로 안 나오는 편입니다. 전장이 많이 긴 편입니다. 비거리 안 나오시는 골퍼들은 PAR4에서 2온 하기가 쉽지 않습니다.',
     rateInfo:
-      '주중 - 별도문의 / 그린 캐디 카트  포함\n주말 - 별도문의 / 그린 캐디 카트  포함',
+      '주중 - 5,100 바트 / 그린 캐디 카트  포함\n주말 - 5,900 바트 / 그린 캐디 카트  포함',
   },
   {
     id: 'laem-chabang-cc-poolvilla',
@@ -102,7 +102,7 @@ export const PATTAYA_POOLVILLA_GOLF_COURSES: PattayaGolfCourseInfo[] = [
     feature:
       '한국 골퍼들에게 상당히 익숙한 골프장인 람차방입니다. 골프장 관리도 잘되어 있고, 재미있는 코스가 많이 있는 편이라 많은 한국 골퍼분들이 선호하는 골프장입니다.',
     rateInfo:
-      '주중 - 별도문의 / 그린 캐디 카트  포함\n주말 - 별도문의 / 그린 캐디 카트  포함',
+      '주중 - 4,280 바트 / 그린 캐디 카트  포함\n주말 - 4,630 바트 / 그린 캐디 카트  포함',
   },
   {
     id: 'phoenix-cc-poolvilla',
@@ -121,7 +121,7 @@ export const PATTAYA_POOLVILLA_GOLF_COURSES: PattayaGolfCourseInfo[] = [
     feature:
       '중상급 골프장 중 제일 인기도가 높은 골프장입니다. 파타야 시내에서도 30분 이내로 가까운 편이고 관리도 5성급 골프장 못지않게 비교적 잘되어 있는 편입니다.',
     rateInfo:
-      '주중 - 별도문의 / 그린 캐디 카트  포함\n주말 - 별도문의 / 그린 캐디 카트  포함',
+      '주중 - 3,100 바트 / 그린 캐디 카트  포함\n주말 - 3,400 바트 / 그린 캐디 카트  포함',
   },
   {
     id: 'burapha-golf-poolvilla',
@@ -141,7 +141,7 @@ export const PATTAYA_POOLVILLA_GOLF_COURSES: PattayaGolfCourseInfo[] = [
     feature:
       '그린이 절묘한 위치의 언덕 위에 놓여 있고 업다운이 상당히 많아 모든 골퍼들이 재밌게 게임을 즐길 수 있는 구장입니다. 드넓게 펼쳐진 언덕과 넓은 호수, 오래된 망고나무 숲이 있어 전형적인 태국의 경치를 즐기실 수 있으며 관리 수준도 괜찮아서 조용하고 차분하게 플레이할 수 있게 조성되어 있습니다.',
     rateInfo:
-      '주중 - 별도문의 / 그린 캐디 카트  포함\n주말 - 별도문의 / 그린 캐디 카트  포함',
+      '주중 - 3,150 바트 / 그린 캐디 카트  포함\n주말 - 3,550 바트 / 그린 캐디 카트  포함',
   },
   {
     id: 'pattaya-cc-poolvilla',
@@ -160,6 +160,6 @@ export const PATTAYA_POOLVILLA_GOLF_COURSES: PattayaGolfCourseInfo[] = [
     feature:
       '산을 깎아서 만든 골프장이기 때문에 언덕을 오르고 내려오는 형식으로 이루어져 있습니다. 넓은 골프장이기에 시각적으로 시원해 보이며, 많은 홀들이 상당히 넓은 페어웨이를 가지고 있어 편안한 라운딩이 가능합니다. 파타야에서 가장 큰 드라이빙 레인지가 있는 골프장입니다.',
     rateInfo:
-      '주중 - 별도문의 / 그린 캐디 카트  포함\n주말 - 별도문의 / 그린 캐디 카트  포함',
+      '주중 - 2,900 바트 / 그린 캐디 카트  포함\n주말 - 3,100 바트 / 그린 캐디 카트  포함',
   },
 ];
