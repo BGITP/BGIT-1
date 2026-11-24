@@ -6,13 +6,13 @@ import {
   Download,
   Building,
   Flag,
-  Share2,
-  Copy,
-  Check,
   X,
   Play,
   ChevronDown,
   ChevronUp,
+  Share2,
+  Copy,
+  Check,
 } from 'lucide-react';
 import { YouTubeShortsSection } from './YouTubeShortsSection';
 import {
@@ -39,7 +39,6 @@ export const PackageList: React.FC<PackageListProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'default' | 'price-asc' | 'price-desc'>('default');
   const [viewLayout, setViewLayout] = useState<'list' | 'grid'>('list');
-  const [copiedToast, setCopiedToast] = useState(false);
   const [previewVideo, setPreviewVideo] = useState<YouTubeShortsItem | null>(null);
   const [videoOrientation, setVideoOrientation] = useState<'portrait' | 'landscape' | null>(null);
   const [isMp4Expanded, setIsMp4Expanded] = useState(false);
@@ -47,6 +46,7 @@ export const PackageList: React.FC<PackageListProps> = ({
   const desktopVideoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
   const [isPeakNoticeOpen, setIsPeakNoticeOpen] = useState(false);
   const [downloadingPdfId, setDownloadingPdfId] = useState<string | null>(null);
+  const [copiedToast, setCopiedToast] = useState(false);
   const displayedMp4Items = isMp4Expanded ? INITIAL_YOUTUBE_SHORTS : INITIAL_YOUTUBE_SHORTS.slice(0, 4);
 
   useEffect(() => {
@@ -63,59 +63,6 @@ export const PackageList: React.FC<PackageListProps> = ({
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [previewVideo]);
-
-  const WOMEN_SWING_SITE_URL = 'https://bgit-ls.ai.studio';
-
-  const handleShare = async () => {
-    const shareData = {
-      title: 'BGIT Thai - 여성 조인골프 스윙 영상',
-      text: 'BGIT Thai 여성 조인골프 스윙 영상 모음',
-      url: WOMEN_SWING_SITE_URL,
-    };
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-      } catch (err) {
-        if ((err as Error)?.name !== 'AbortError') {
-          handleCopyLink();
-        }
-      }
-    } else {
-      handleCopyLink();
-    }
-  };
-
-  const handleCopyLink = async () => {
-    try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(WOMEN_SWING_SITE_URL);
-      } else {
-        const textarea = document.createElement('textarea');
-        textarea.value = WOMEN_SWING_SITE_URL;
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
-        textarea.focus();
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-      }
-      setCopiedToast(true);
-      setTimeout(() => setCopiedToast(false), 2500);
-    } catch {
-      const textarea = document.createElement('textarea');
-      textarea.value = WOMEN_SWING_SITE_URL;
-      textarea.style.position = 'fixed';
-      textarea.style.opacity = '0';
-      document.body.appendChild(textarea);
-      textarea.focus();
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-      setCopiedToast(true);
-      setTimeout(() => setCopiedToast(false), 2500);
-    }
-  };
 
   useEffect(() => {
     if (initialCategory) {
@@ -177,6 +124,59 @@ export const PackageList: React.FC<PackageListProps> = ({
     }
   };
 
+  const WOMEN_SWING_SITE_URL = 'https://bgit-ls.ai.studio';
+
+  const handleShare = async () => {
+    const shareData = {
+      title: 'BGIT Thai - 여성 조인골프 스윙 영상',
+      text: 'BGIT Thai 여성 조인골프 스윙 영상 모음',
+      url: WOMEN_SWING_SITE_URL,
+    };
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        if ((err as Error)?.name !== 'AbortError') {
+          handleCopyLink();
+        }
+      }
+    } else {
+      handleCopyLink();
+    }
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(WOMEN_SWING_SITE_URL);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = WOMEN_SWING_SITE_URL;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+      setCopiedToast(true);
+      setTimeout(() => setCopiedToast(false), 2500);
+    } catch {
+      const textarea = document.createElement('textarea');
+      textarea.value = WOMEN_SWING_SITE_URL;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      setCopiedToast(true);
+      setTimeout(() => setCopiedToast(false), 2500);
+    }
+  };
+
   return (
     <section id="packages" className={`pt-4 md:pt-[1cm] ${selectedCategory === 'guide' || selectedCategory === 'vehicle-guide' ? 'pb-3 sm:pb-4' : 'pb-12 sm:pb-16'} bg-[#f6f4ee] md:bg-white relative`}>
       {/* Toast when copied */}
@@ -186,6 +186,7 @@ export const PackageList: React.FC<PackageListProps> = ({
           <span className="font-bold">링크가 클립보드에 복사되었습니다!</span>
         </div>
       )}
+
       <div className="max-w-[1156px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Category Pills: Hidden on mobile (handled by HeroSection menu), visible on desktop full-width single row */}
@@ -248,81 +249,61 @@ export const PackageList: React.FC<PackageListProps> = ({
               </h3>
             </div>
 
-            <div className="bg-linear-to-b from-emerald-50/70 via-stone-50 to-white rounded-2xl border !border-[#a7f3d0] p-5 sm:p-7 shadow-xs">
-              <div className="mb-3.5 bg-white rounded-xl p-3.5 sm:p-4 border border-emerald-100 shadow-xs">
-                <p className="text-[15px] sm:text-[17px] font-bold text-[#10231b] leading-snug">
-                  태국현지 여성골퍼와 함께하는 특별한 라운드
-                </p>
-                <p className="text-[14px] sm:text-[15.5px] text-stone-600 leading-relaxed mt-0.5">
-                  여유로운 라운드와 즐거운 교류가 어우러지는 프리미엄 골프 경험
-                </p>
-              </div>
-
-              {/* Inner Notice Box */}
-              <div className="bg-emerald-50/80 rounded-xl p-3.5 sm:p-4 border border-emerald-100 relative">
-                {/* Line 1: Link + Share/Copy buttons */}
-                <div className="flex flex-wrap items-center gap-2.5 mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#d8583c] shrink-0" aria-hidden="true" />
+            {/* Notice Box */}
+            <div className="bg-emerald-50/80 rounded-xl p-4 sm:p-5 border border-emerald-100 space-y-3 shadow-xs">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-start gap-2 sm:gap-3.5 pl-3.5 pb-2.5 border-b border-emerald-200/70">
+                  <span className="text-xs sm:text-sm font-bold text-emerald-950">
+                    조인골프 가능한 여성골퍼 스윙영상 모음
+                  </span>
+                  <div className="flex items-center gap-1.5 flex-wrap">
                     <a
-                      href="https://bgit-ls.ai.studio"
+                      href={WOMEN_SWING_SITE_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[15px] font-bold text-[#d8583c] underline decoration-[#d8583c]/60 underline-offset-2 hover:text-[#b54026]"
+                      className="text-[14px] font-normal text-orange-600 hover:text-orange-700 underline underline-offset-2 mr-1"
                     >
-                      https://bgit-ls.ai.studio
+                      {WOMEN_SWING_SITE_URL}
                     </a>
-                  </div>
-                  <div className="flex items-center gap-1.5 ml-0.5">
                     <button
                       type="button"
                       onClick={handleShare}
-                      className="w-7 h-7 rounded-full bg-[#d7f0e5] hover:bg-[#c2e8d7] border border-[#bce4d4] flex items-center justify-center text-[#10231b] transition-colors cursor-pointer active:scale-95"
-                      title="공유하기 (https://bgit-ls.ai.studio)"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-200 rounded-lg text-[11px] font-bold transition-colors cursor-pointer"
                     >
-                      <Share2 className="w-3.5 h-3.5 stroke-[2.2]" />
+                      <Share2 className="w-3 h-3" />
+                      공유
                     </button>
                     <button
                       type="button"
                       onClick={handleCopyLink}
-                      className="w-7 h-7 rounded-full bg-[#d7f0e5] hover:bg-[#c2e8d7] border border-[#bce4d4] flex items-center justify-center text-[#10231b] transition-colors cursor-pointer active:scale-95"
-                      title="링크 복사 (https://bgit-ls.ai.studio)"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-200 rounded-lg text-[11px] font-bold transition-colors cursor-pointer"
                     >
-                      {copiedToast ? (
-                        <Check className="w-3.5 h-3.5 stroke-[2.5] text-emerald-700" />
-                      ) : (
-                        <Copy className="w-3.5 h-3.5 stroke-[2.2]" />
-                      )}
+                      <Copy className="w-3 h-3" />
+                      복사
                     </button>
                   </div>
                 </div>
-
-                {/* Line 1-2: Description dropped below link */}
-                <p className="flex items-start gap-2 text-[14px] sm:text-[15px] font-normal text-[#d8583c] leading-relaxed mb-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#d8583c] mt-[8px] sm:mt-[9px] shrink-0" aria-hidden="true" />
-                  <span className="text-[15px] sm:text-[16px]">위 주소는 요금표 노출 없이 여성 골퍼 스윙 영상만 모아둔 고객 공유 전용 사이트 입니다</span>
-                </p>
-
-                {/* Line 2 */}
-                <p className="flex items-start gap-2 text-[15px] text-[#23352c] leading-relaxed font-normal">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#1d6b4f] mt-[8px] sm:mt-[9px] shrink-0" aria-hidden="true" />
-                  <span>조인 골프를 문의하신 고객님께 [공유] 또는 [복사] 아이콘을 통해 링크를 전달해 주세요</span>
-                </p>
-
-                {/* Line 3 */}
-                <p className="flex items-start gap-2 text-[15px] text-[#23352c] leading-relaxed font-normal mt-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#1d6b4f] mt-[8px] sm:mt-[9px] shrink-0" aria-hidden="true" />
-                  <span>고객님이 선택한 여성골프를 저희에게 알려주시면 최대한 반영해 빠르게 추진 하겠습니다</span>
-                </p>
-              </div>
+                <ul className="space-y-1.5 text-xs sm:text-sm text-stone-700 leading-relaxed">
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-700 font-bold">•</span>
+                    <span>위 주소는 요금표 노출 없이 여성 골퍼 스윙 영상만 모아둔 고객 공유 전용 사이트 입니다</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-700 font-bold">•</span>
+                    <span>조인 골프를 문의하신 고객님께 [공유] 또는 [복사] 아이콘을 통해 링크를 전달해 주세요</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-700 font-bold">•</span>
+                    <span>고객님이 선택한 여성골퍼를 저희에게 알려주시면 일정· 코스에 맞춰 최적의 라운드를 매칭해 드립니다</span>
+                  </li>
+                </ul>
             </div>
           </div>
         )}
 
         {/* 파타야 가성비 골프 전용 안내 배너 (파타야 가성비 페이지에서만 표시) */}
         {selectedCategory === 'pattaya-value' && (
-          <div className="mb-6">
-            <div className="flex items-center justify-start gap-2 mb-3 text-left">
+          <div className="mb-[58px] sm:mb-[62px]">
+            <div className="flex items-center justify-start gap-2 text-left">
               <div className="w-1.5 h-5 bg-emerald-700 rounded-full shrink-0" />
               <h3 className="text-[15px] sm:text-lg font-bold text-stone-900 tracking-tight flex flex-wrap items-center gap-x-2 gap-y-0.5">
                 <span>파타야 가성비 골프</span>
@@ -330,216 +311,117 @@ export const PackageList: React.FC<PackageListProps> = ({
                 <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">골프는 가볍게, 재미는 그대로</span>
               </h3>
             </div>
-
-            <div className="bg-linear-to-b from-emerald-50/70 via-stone-50 to-white rounded-2xl border border-emerald-200/90 p-4 sm:p-5 shadow-xs">
-              <div className="bg-emerald-50/80 rounded-xl p-3.5 sm:p-4 border border-emerald-100 text-xs sm:text-sm text-stone-800 leading-relaxed space-y-1">
-                <p className="font-semibold text-emerald-950">
-                  "방콕·파타야 골프는 더 가볍게, 라운딩의 감동과 재미는 그대로"
-                </p>
-                <p className="text-stone-700 font-medium">
-                  골프 여행, 꼭 비쌀 필요는 없습니다. 불필요한 가격 거품은 덜어내고 골퍼가 체감하는 라운드 만족도만 알차게 담았습니다.
-                </p>
-              </div>
-            </div>
           </div>
         )}
 
         {/* 파타야 고품격 골프 전용 안내 배너 (파타야 고품격 페이지에서만 표시) */}
         {selectedCategory === 'pattaya-premium' && (
-          <div className="mb-6">
-            <div className="flex items-center justify-start gap-2 mb-3 text-left">
+          <div className="mb-[58px] sm:mb-[62px]">
+            <div className="flex items-center justify-start gap-2 text-left">
               <div className="w-1.5 h-5 bg-emerald-700 rounded-full shrink-0" />
               <h3 className="text-[15px] sm:text-lg font-bold text-stone-900 tracking-tight flex flex-wrap items-center gap-x-2 gap-y-0.5">
                 <span>파타야 고품격 골프</span>
                 <span className="text-stone-300 font-normal">|</span>
-                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">여유로운 라운드 골프경험</span>
+                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">파타야에서 완성하는 격조 높은 골프의 정수</span>
               </h3>
-            </div>
-
-            <div className="bg-linear-to-b from-emerald-50/70 via-stone-50 to-white rounded-2xl border border-emerald-200/90 p-4 sm:p-5 shadow-xs">
-              <div className="bg-emerald-50/80 rounded-xl p-3.5 sm:p-4 border border-emerald-100 text-xs sm:text-sm text-stone-800 leading-relaxed space-y-1">
-                <p className="font-semibold text-emerald-950">
-                  "파타야에서 완성하는 격조 높은 골프의 정수"
-                </p>
-                <p className="text-stone-700 font-medium">
-                  골프 여행의 만족도는 라운딩의 질에서 시작됩니다. BGIT는 파타야를 대표하는 정상급 챔피언십 코스 중에서도 코스 관리 상태, 서비스, 접근성을 꼼꼼히 따져 엄선했습니다.
-                </p>
-              </div>
             </div>
           </div>
         )}
 
         {/* 파타야 럭셔리 골프 전용 안내 배너 (파타야 럭셔리 페이지에서만 표시) */}
         {selectedCategory === 'pattaya-luxury' && (
-          <div className="mb-6">
-            <div className="flex items-center justify-start gap-2 mb-3 text-left">
+          <div className="mb-[58px] sm:mb-[62px]">
+            <div className="flex items-center justify-start gap-2 text-left">
               <div className="w-1.5 h-5 bg-emerald-700 rounded-full shrink-0" />
               <h3 className="text-[15px] sm:text-lg font-bold text-stone-900 tracking-tight flex flex-wrap items-center gap-x-2 gap-y-0.5">
                 <span>파타야 럭셔리 골프</span>
                 <span className="text-stone-300 font-normal">|</span>
-                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">여유로운 라운드 골프경험</span>
+                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">특별한 분과의 동행, 중요한 비즈니스 라운딩, 인생의 기념 여행</span>
               </h3>
-            </div>
-
-            <div className="bg-linear-to-b from-emerald-50/70 via-stone-50 to-white rounded-2xl border border-emerald-200/90 p-4 sm:p-5 shadow-xs">
-              <div className="bg-emerald-50/80 rounded-xl p-3.5 sm:p-4 border border-emerald-100 text-xs sm:text-sm text-stone-800 leading-relaxed space-y-1">
-                <p className="font-semibold text-emerald-950">
-                  "단 하루도 평범하지 않게, 오직 당신만을 위해 준비된 VIP 라운딩"
-                </p>
-                <p className="text-stone-700 font-medium">
-                  특별한 분과의 동행, 중요한 비즈니스 라운딩, 인생의 기념 여행이라면 선택은 하나입니다. 최상급 코스와 프라이빗 서비스로 파타야 최고의 골프를 완성합니다.
-                </p>
-              </div>
             </div>
           </div>
         )}
 
         {/* 파타야 풀빌라 골프 전용 안내 배너 (파타야 풀빌라 페이지에서만 표시) */}
         {selectedCategory === 'pattaya-poolvilla' && (
-          <div className="mb-6">
-            <div className="flex items-center justify-start gap-2 mb-3 text-left">
+          <div className="mb-[58px] sm:mb-[62px]">
+            <div className="flex items-center justify-start gap-2 text-left">
               <div className="w-1.5 h-5 bg-emerald-700 rounded-full shrink-0" />
               <h3 className="text-[15px] sm:text-lg font-bold text-stone-900 tracking-tight flex flex-wrap items-center gap-x-2 gap-y-0.5">
                 <span>파타야 풀빌라 골프</span>
                 <span className="text-stone-300 font-normal">|</span>
-                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">여유로운 라운드 골프경험</span>
+                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">라운딩은 필드에서, 휴식은 나만의 프라이빗 풀빌라에서</span>
               </h3>
-            </div>
-
-            <div className="bg-linear-to-b from-emerald-50/70 via-stone-50 to-white rounded-2xl border border-emerald-200/90 p-4 sm:p-5 shadow-xs">
-              <div className="bg-emerald-50/80 rounded-xl p-3.5 sm:p-4 border border-emerald-100 text-xs sm:text-sm text-stone-800 leading-relaxed space-y-1">
-                <p className="font-semibold text-emerald-950">
-                  "라운딩은 필드에서, 휴식은 나만의 프라이빗 풀빌라에서"
-                </p>
-                <p className="text-stone-700 font-medium">
-                  18홀을 돌고 돌아와 마주하는 에메랄드빛 개인 수영장. 오직 우리 일행만을 위한 독립된 공간에서 라운딩의 피로를 풀고 특별한 저녁을 만끽하세요.
-                </p>
-              </div>
             </div>
           </div>
         )}
 
         {/* 파타야 골프텔 전용 안내 배너 (파타야 골프텔 페이지에서만 표시) */}
         {selectedCategory === 'pattaya-golftel' && (
-          <div className="mb-6">
-            <div className="flex items-center justify-start gap-2 mb-3 text-left">
+          <div className="mb-[58px] sm:mb-[62px]">
+            <div className="flex items-center justify-start gap-2 text-left">
               <div className="w-1.5 h-5 bg-emerald-700 rounded-full shrink-0" />
               <h3 className="text-[15px] sm:text-lg font-bold text-stone-900 tracking-tight flex flex-wrap items-center gap-x-2 gap-y-0.5">
                 <span>파타야 골프텔</span>
                 <span className="text-stone-300 font-normal">|</span>
-                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">여유로운 라운드 골프경험</span>
+                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">골프에만 온전히 집중하는 가장 스마트하고 효율적인 선택</span>
               </h3>
-            </div>
-
-            <div className="bg-linear-to-b from-emerald-50/70 via-stone-50 to-white rounded-2xl border border-emerald-200/90 p-4 sm:p-5 shadow-xs">
-              <div className="bg-emerald-50/80 rounded-xl p-3.5 sm:p-4 border border-emerald-100 text-xs sm:text-sm text-stone-800 leading-relaxed space-y-1">
-                <p className="font-semibold text-emerald-950">
-                  "골프에만 온전히 집중하는 가장 스마트하고 효율적인 선택"
-                </p>
-                <p className="text-stone-700 font-medium">
-                  골프장과 숙소가 바로 연결되어 이동 시간은 줄이고 라운딩 시간은 늘려주는 실속형 투어입니다. 이른 새벽 티타임도 여유롭게 즐기세요.
-                </p>
-              </div>
             </div>
           </div>
         )}
 
         {/* 방콕 가성비 골프 전용 안내 배너 (방콕 가성비 페이지에서만 표시) */}
         {selectedCategory === 'bangkok-value' && (
-          <div className="mb-6">
-            <div className="flex items-center justify-start gap-2 mb-3 text-left">
+          <div className="mb-[58px] sm:mb-[62px]">
+            <div className="flex items-center justify-start gap-2 text-left">
               <div className="w-1.5 h-5 bg-emerald-700 rounded-full shrink-0" />
               <h3 className="text-[15px] sm:text-lg font-bold text-stone-900 tracking-tight flex flex-wrap items-center gap-x-2 gap-y-0.5">
                 <span>방콕 가성비 골프</span>
                 <span className="text-stone-300 font-normal">|</span>
-                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">여유로운 라운드 골프경험</span>
+                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">도심 속 라운딩, 부담은 가볍게 만족도는 확실하게</span>
               </h3>
-            </div>
-
-            <div className="bg-linear-to-b from-emerald-50/70 via-stone-50 to-white rounded-2xl border border-emerald-200/90 p-4 sm:p-5 shadow-xs">
-              <div className="bg-emerald-50/80 rounded-xl p-3.5 sm:p-4 border border-emerald-100 text-xs sm:text-sm text-stone-800 leading-relaxed space-y-1">
-                <p className="font-semibold text-emerald-950">
-                  "도심 속 라운딩, 부담은 가볍게 만족도는 확실하게"
-                </p>
-                <p className="text-stone-700 font-medium">
-                  방콕 골프는 비싸다는 편견을 내려놓으세요. 시내 및 공항에서 가까운 우수 코스를 엄선하여 투명한 견적으로 알차게 구성했습니다.
-                </p>
-              </div>
             </div>
           </div>
         )}
 
         {/* 방콕 럭셔리 골프 전용 안내 배너 (방콕 럭셔리 페이지에서만 표시) */}
         {selectedCategory === 'bangkok-luxury' && (
-          <div className="mb-6">
-            <div className="flex items-center justify-start gap-2 mb-3 text-left">
+          <div className="mb-[58px] sm:mb-[62px]">
+            <div className="flex items-center justify-start gap-2 text-left">
               <div className="w-1.5 h-5 bg-emerald-700 rounded-full shrink-0" />
               <h3 className="text-[15px] sm:text-lg font-bold text-stone-900 tracking-tight flex flex-wrap items-center gap-x-2 gap-y-0.5">
                 <span>방콕 럭셔리 골프</span>
                 <span className="text-stone-300 font-normal">|</span>
-                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">여유로운 라운드 골프경험</span>
+                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">방콕에서 누리는 가장 품격 있는 하루, 태국 최고 권위의 하이엔드 라운딩</span>
               </h3>
-            </div>
-
-            <div className="bg-linear-to-b from-emerald-50/70 via-stone-50 to-white rounded-2xl border border-emerald-200/90 p-4 sm:p-5 shadow-xs">
-              <div className="bg-emerald-50/80 rounded-xl p-3.5 sm:p-4 border border-emerald-100 text-xs sm:text-sm text-stone-800 leading-relaxed space-y-1">
-                <p className="font-semibold text-emerald-950">
-                  "방콕에서 누리는 가장 품격 있는 하루, 태국 최고 권위의 하이엔드 라운딩"
-                </p>
-                <p className="text-stone-700 font-medium">
-                  중요한 비즈니스 라운딩, 소중한 분과의 기념 여행, 특별한 손님을 모시는 자리라면 선택은 하나입니다. 방콕 최상위 명문 코스에서 완벽한 하루를 경험하세요.
-                </p>
-              </div>
             </div>
           </div>
         )}
 
         {/* 차량.가이드 전용 안내 배너 (차량.가이드 페이지에서만 표시) */}
         {selectedCategory === 'vehicle-guide' && (
-          <div className="mb-2">
-            <div className="flex items-center justify-start gap-2 mb-3 text-left">
+          <div className="mb-5 sm:mb-6">
+            <div className="flex items-center justify-start gap-2 text-left">
               <div className="w-1.5 h-5 bg-emerald-700 rounded-full shrink-0" />
               <h3 className="text-[15px] sm:text-lg font-bold text-stone-900 tracking-tight flex flex-wrap items-center gap-x-2 gap-y-0.5">
                 <span>차량 &amp; 기사 요금표</span>
                 <span className="text-stone-300 font-normal">|</span>
-                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">VIP 단독 차량 · 한국어 가이드 안내</span>
+                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">풍부한 경험의 베테랑 기사와 단독 차량</span>
               </h3>
-            </div>
-
-            <div className="bg-linear-to-b from-emerald-50/70 via-stone-50 to-white rounded-2xl border border-emerald-200/90 p-4 sm:p-5 shadow-xs">
-              <div className="bg-emerald-50/80 rounded-xl p-3.5 sm:p-4 border border-emerald-100 text-xs sm:text-sm text-stone-800 leading-relaxed space-y-1">
-                <p className="font-semibold text-emerald-950">
-                  "이동의 순간까지 라운드의 일부가 됩니다 · 단독 차량 & 현지 매니저 케어"
-                </p>
-                <p className="text-stone-700 font-medium">
-                  타 일행과 섞이지 않는 VIP 단독 차량 운행 기준부터, 한국어 전문 가이드 동행 요청 및 실시간 현지 케어 서비스를 확인하세요.
-                </p>
-              </div>
             </div>
           </div>
         )}
 
         {/* 여행 자료실 전용 안내 배너 (여행 자료실 페이지에서만 표시) */}
         {selectedCategory === 'guide' && (
-          <div className="mb-2">
-            <div className="flex items-center justify-start gap-2 mb-3 text-left">
+          <div className="mb-5 sm:mb-6">
+            <div className="flex items-center justify-start gap-2 text-left">
               <div className="w-1.5 h-5 bg-emerald-700 rounded-full shrink-0" />
               <h3 className="text-[15px] sm:text-lg font-bold text-stone-900 tracking-tight flex flex-wrap items-center gap-x-2 gap-y-0.5">
                 <span>여행 자료실</span>
                 <span className="text-stone-300 font-normal">|</span>
-                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">태국 입국 · 공항 미팅 가이드</span>
+                <span className="text-black text-[12px] sm:text-[14px] font-normal tracking-tight">출국 전 전자입국카드(TDAC) 작성부터 수완나품 공항 미팅까지 한눈에</span>
               </h3>
-            </div>
-
-            <div className="bg-linear-to-b from-emerald-50/70 via-stone-50 to-white rounded-2xl border border-emerald-200/90 p-4 sm:p-5 shadow-xs">
-              <div className="bg-emerald-50/80 rounded-xl p-3.5 sm:p-4 border border-emerald-100 text-xs sm:text-sm text-stone-800 leading-relaxed space-y-1">
-                <p className="font-semibold text-emerald-950">
-                  "출국 전 전자입국카드(TDAC) 작성부터 수완나품 공항 미팅까지 한눈에"
-                </p>
-                <p className="text-stone-700 font-medium">
-                  태국 입국 시 꼭 확인해야 하는 전자입국카드 작성법, 세관·반입 주의사항 및 공항 미팅포인트 위치를 출발 전 미리 확인하세요.
-                </p>
-              </div>
             </div>
           </div>
         )}
@@ -738,8 +620,8 @@ export const PackageList: React.FC<PackageListProps> = ({
 
             {/* Desktop View: Existing Table Layout */}
             <div className="hidden md:block mb-6 rounded-xl border border-stone-200 shadow-xs overflow-hidden bg-white hover:border-[#d0fae5] transition-colors">
-              <div className="px-6 py-3.5 bg-stone-100/90 border-b border-stone-200 flex items-center justify-between text-xs font-bold text-stone-600">
-                <span className="text-[15px] sm:text-base font-bold text-stone-800">PDF 제목을 클릭하면 상세 정보를 확인 하실수 있습니다</span>
+              <div className="relative px-6 py-3.5 bg-stone-100/90 border-b border-stone-200 flex items-center justify-end text-xs font-bold text-stone-600">
+                <span className="absolute left-1/2 -translate-x-1/2 text-[13px] sm:text-[14px] font-bold text-stone-800 text-center whitespace-nowrap">PDF 제목을 클릭하면 상세 정보를 확인 하실수 있습니다</span>
                 <span>다운로드</span>
               </div>
 
